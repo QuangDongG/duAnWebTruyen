@@ -35,9 +35,11 @@ function tt() {
       creatp.textContent = "Solo Leveling";
     }
     const creata = document.createElement("a");
-    creata.textContent = "Đọc";
+    const creatp1 = document.createElement("p");
+    creatp1.textContent = "Đọc";
     creata.classList.add("doc");
     creata.setAttribute("href", "#");
+    creata.append(creatp1);
     creatdiv.append(creatp, creata);
     select.append(creatdiv);
   }

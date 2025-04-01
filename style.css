@@ -9,20 +9,30 @@ body {
     rgba(71, 30, 84, 1) 119.9%
   );
 }
+img {
+  border-radius: 5px;
+}
 .tk1 {
   position: relative;
   border-radius: 30px;
-  width: 100px;
-  height: 30px;
+  width: 8vw;
+  height: 3vw;
   background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
+.tk {
+  font-size: 1.3vw;
+}
+.logo a img {
+  width: 14vw;
+  height: 6vw;
+}
 .login {
-  width: 100px;
-  height: 53px;
+  font-size: 1.1vw;
+  width: 8vw;
+  height: 3.5vw;
   background-image: linear-gradient(
     179.4deg,
     rgba(12, 20, 69, 1) -16.9%,
@@ -45,6 +55,10 @@ body {
   margin-right: 30px;
   cursor: pointer;
   color: white;
+}
+li a {
+  font-size: 1.2vw;
+  margin: 0 1vw;
 }
 .ul {
   display: flex;
@@ -79,39 +93,49 @@ body {
   width: 80%;
 }
 /* tim kiem */
+.csearch {
+  position: relative;
+  display: flex;
+}
 .text {
   text-align: center;
-  width: 40px;
-  height: 40px;
+  width: 3vw;
+  height: 3vw;
   color: black;
-  font-size: 15px;
-  border-radius: 10px;
+  font-size: 1vw;
+  border-radius: 50px;
   border: solid 2px rgb(241, 238, 241);
   transition: 0.8s;
+  justify-content: center;
+  align-items: center;
 }
 .search {
   display: flex;
   justify-content: center;
   position: relative;
-  height: 45px;
+  height: 2vw;
+  margin-top: 2vw;
 }
 .but {
-  font-size: 24px;
+  font-size: 1.5vw;
   cursor: pointer;
-  width: 48px;
-  height: 48px;
-  border-radius: 10px;
+  width: 3.8vw;
+  height: 3.8vw;
+  border-radius: 50px;
   background-color: rgb(0, 0, 0);
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: -1.5px;
+  top: -0.5vw;
+  left: -0.5vw;
   position: absolute;
+  transition: 0.8s;
 }
 .text.fix {
-  width: 450px;
-  padding-left: 50px;
+  width: 45vw;
+  border-radius: 50px;
+  padding-left: 4vw;
 }
 .but:focus,
 .text.fix:focus {
@@ -137,7 +161,7 @@ body {
 }
 .truyenmoi {
   width: 20%;
-  height: 65vh;
+  height: 40vw;
   background-size: cover;
   background-position: center;
   position: relative;
@@ -161,21 +185,27 @@ body {
 .doc {
   text-decoration: none;
   color: white;
-  padding: 2vh 3vw;
+  height: 3vw;
   border-radius: 30px;
   background-color: red;
   position: absolute;
   right: 3px;
   bottom: 5px;
+  width: 8vw;
+  font-size: 1.5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .section {
   position: relative;
 }
 .arow .fa-solid {
   text-align: center;
-  font-size: 55px;
-  width: 60px;
-  height: 60px;
+  font-size: 4.8vw;
+  width: 5vw;
+  height: 5vw;
   background-color: rgba(245, 245, 220, 0.433);
   border-radius: 50%;
   position: absolute;
@@ -234,7 +264,7 @@ body {
   right: 0;
   width: 20px;
   height: 20px;
-  border-radius: 50%;
+  border-radius: 50px;
   background-color: rgba(106, 126, 126, 0.837);
   text-align: center;
   font-size: 20px;
@@ -291,6 +321,7 @@ body {
   background: rgba(0, 0, 0, 0.605);
 }
 .pCreat {
+  width: 12vw;
   display: block;
   cursor: pointer;
   color: aliceblue;
@@ -298,6 +329,7 @@ body {
   background-color: red;
   border-radius: 10px;
   text-align: center;
+  font-size: 1.2vw;
 }
 .overlay {
   width: 100%;
@@ -460,7 +492,7 @@ hr {
 }
 .anh_dai_dien {
   width: 2.4vw;
-  height: auto;
+  height: 2.4vw;
   border: solid 2px rgb(234, 179, 179);
   border-radius: 50%;
 }
@@ -508,10 +540,19 @@ hr {
   width: 18vw;
   height: 26vw;
 }
+.p2Creat {
+  width: 18vw;
+  color: rgb(255, 255, 255);
+  background-color: red;
+  text-align: center;
+  padding: 0.5vw;
+  border-radius: 20px;
+  cursor: pointer;
+}
 .divImg {
   margin: 0 auto;
 }
-#idImg {
+#iidImg {
   width: 80%;
   margin: 0 auto;
 }

@@ -18,17 +18,15 @@ async function fetchData() {
       "https://otruyenapi.com/v1/api/danh-sach/truyen-moi?page=1"
     );
     const total = response.data.data.params.pagination.totalItems;
-    const totalPages = Math.ceil(total / 24);
-
     let pagePromises = [];
-    for (let page = 1; page <= totalPages; page++) {
+    for (let page = 1; page <= 1; page++) {
       pagePromises.push(fetchPageData(page));
     }
+    console.log(pagePromises.length);
 
-    // Giới hạn số lượng Promise đồng thời (Chạy tối đa 5 Promise đồng thời)
-    const chunkSize = 5; // Điều chỉnh số lượng Promise đồng thời
+    const chunkSize = 2;
     for (let i = 0; i < pagePromises.length; i += chunkSize) {
-      await Promise.all(pagePromises.slice(i, i + chunkSize)); // Chạy theo từng nhóm
+      await Promise.all(pagePromises.slice(i, i + chunkSize));
     }
     diV.removeChild(loading);
     phanTrang(currentPage);
@@ -38,11 +36,9 @@ async function fetchData() {
   }
 }
 
-// Hàm tải dữ liệu cho từng trang
 async function fetchPageData(page) {
-  // Kiểm tra xem dữ liệu đã được lưu trong cache chưa
   if (cache[page]) {
-    responseData = responseData.concat(cache[page]); // Dữ liệu đã lưu, không cần tải lại
+    responseData = responseData.concat(cache[page]);
     return;
   }
 
@@ -51,7 +47,7 @@ async function fetchPageData(page) {
       `https://otruyenapi.com/v1/api/danh-sach/truyen-moi?page=${page}`
     );
     const data = responsed.data.data.items;
-    cache[page] = data; // Lưu vào cache để sử dụng lại sau
+    cache[page] = data;
     responseData = responseData.concat(data);
   } catch (error) {
     console.error("Có lỗi xảy ra khi tải trang", page, error);
@@ -117,16 +113,26 @@ export function numberPage(items) {
     if (i === currentPage - 1) {
       liImg.classList.add("mauTrang");
     }
+    if (i > 0) {
+      liImg.addEventListener("click", function () {
+        liImg.classList.add("mauTrang");
+        currentPage = i + 1;
+        const data = "truyen-moi";
+        window.location.href = `src/theloai.html?data=${data}&page=${encodeURIComponent(
+          currentPage
+        )}`;
+      });
+    } else {
+      liImg.addEventListener("click", function () {
+        const allPages = ulImg.querySelectorAll(".liImg");
+        allPages.forEach((li) => li.classList.remove("mauTrang"));
 
-    liImg.addEventListener("click", function () {
-      const allPages = ulImg.querySelectorAll(".liImg");
-      allPages.forEach((li) => li.classList.remove("mauTrang"));
-
-      liImg.classList.add("mauTrang");
-      currentPage = i + 1;
-      phanTrang(currentPage);
-      numberPage(items);
-    });
+        liImg.classList.add("mauTrang");
+        currentPage = i + 1;
+        phanTrang(currentPage);
+        numberPage(items);
+      });
+    }
   }
 }
 export function Trangdoctruyen(item, pCreat) {
@@ -271,6 +277,27 @@ export async function TheLoai(string) {
 document.body.addEventListener("click", function () {
   console.log(window.location.href);
 });
-
+//tim-kiem
+async function TimKiem() {
+  const text = document.querySelector(".text");
+  const but = document.querySelector(".but");
+  but.addEventListener("click", function () {
+    const data = "tim-kiem";
+    console.log(text.value);
+    window.location.href = `src/theloai.html?data=${data}&page=1&keyword=${encodeURIComponent(
+      text.value
+    )}`;
+  });
+  text.addEventListener("keyup", function (e) {
+    if (e.key === "Enter") {
+      const data = "tim-kiem";
+      console.log(text.value);
+      window.location.href = `src/theloai.html?data=${data}&page=1&keyword=${encodeURIComponent(
+        text.value
+      )}`;
+    }
+  });
+}
+TimKiem();
 TheLoai(string);
 fetchData();

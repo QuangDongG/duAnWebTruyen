@@ -8,6 +8,7 @@ let currentPage = 1;
 let dataPage = [];
 const data = decodeURIComponent(urlParams.get("data")); // Lấy giá trị của 'data'
 const page = decodeURIComponent(urlParams.get("page"));
+const keyword = urlParams.get("keyword");
 console.log(page);
 console.log(data);
 
@@ -15,9 +16,20 @@ console.log(data);
 const ulImg = document.querySelector(".ulImg");
 async function theLoaiCapNhat() {
   try {
-    let theloai = await axios.get(
-      "https://otruyenapi.com/v1/api/the-loai/" + data + "?page=" + page
-    );
+    let theloai;
+    if (data === "truyen-moi") {
+      theloai = await axios.get(
+        "https://otruyenapi.com/v1/api/danh-sach/" + data + "?page=" + page
+      );
+    } else if (data === "tim-kiem") {
+      theloai = await axios.get(
+        ` https://otruyenapi.com/v1/api/${data}?page=${page}&keyword=${keyword}`
+      );
+    } else {
+      theloai = await axios.get(
+        "https://otruyenapi.com/v1/api/the-loai/" + data + "?page=" + page
+      );
+    }
 
     console.log(theloai);
 
@@ -50,7 +62,7 @@ export function phanTrang(page) {
       "https://img.otruyenapi.com/uploads/comics/" + item.thumb_url;
     const pCreat = document.createElement("p");
     pCreat.textContent = "Đọc Truyện";
-    pCreat.classList.add("pCreat");
+    pCreat.classList.add("p2Creat");
     creatDiv.append(creatImg);
     diV.append(creatDiv);
     creatDiv.append(pCreat);
