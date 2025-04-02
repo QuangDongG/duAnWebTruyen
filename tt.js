@@ -144,14 +144,19 @@ arrow[1].addEventListener("mouseout", function () {
   arrow[1].classList.add("hide");
 });
 //phanloaihide
-function hideTL() {
+export function hideTL() {
   const theLoai = document.querySelector(".theLoaiover");
   const theloai2 = document.querySelector(".theloai2");
   theLoai.addEventListener("mouseover", function () {
     theloai2.style.visibility = "visible";
+    theloai2.style.opacity = "1";
+    theloai2.style.transform = "translate(0)";
+    theloai2.style.transition = "0.5s";
   });
   theLoai.addEventListener("mouseout", function () {
     theloai2.style.visibility = "hidden";
+    theloai2.style.opacity = "0";
+    theloai2.style.transform = "translate(10vw)";
   });
 }
 hideTL();

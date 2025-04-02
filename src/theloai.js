@@ -1,7 +1,6 @@
-import { Trangdoctruyen } from "./Local_main.js";
-//import { hideTL } from "../tt.js";
+import { Trangdoctruyen, TimKiem, TheLoai } from "./Local_main.js";
+// import { hideTL } from "..tt.js";
 const diV = document.querySelector(".divTL");
-
 const urlParams = new URLSearchParams(window.location.search);
 const countPage = 24;
 let currentPage = 1;
@@ -13,6 +12,7 @@ console.log(page);
 console.log(data);
 
 console.log(data);
+
 const ulImg = document.querySelector(".ulImg");
 async function theLoaiCapNhat() {
   try {
@@ -115,6 +115,26 @@ export function numberPage(items) {
     });
   }
 }
-//tloai
+const string = "";
+export function hideTL() {
+  const theLoai = document.querySelector(".theLoaiover");
+  const theloai2 = document.querySelector(".theloai2");
 
+  theLoai.addEventListener("mouseover", function () {
+    theloai2.style.visibility = "visible";
+    theloai2.style.opacity = "1";
+    theloai2.style.transform = "translate(0)";
+    theloai2.style.transition = "0.5s";
+  });
+  theLoai.addEventListener("mouseout", function () {
+    theloai2.style.visibility = "hidden";
+    theloai2.style.opacity = "0";
+    theloai2.style.transform = "translate(10vw)";
+  });
+}
+//tloai
+const divtheloai2 = document.querySelector(".divtheloai2");
+TimKiem(string);
+hideTL();
+TheLoai(string, divtheloai2);
 theLoaiCapNhat();

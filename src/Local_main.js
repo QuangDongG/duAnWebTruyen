@@ -250,11 +250,12 @@ export function Trangdoctruyen(item, pCreat) {
   });
 }
 //theloai
-export let slug = "";
+
 let string = "src/";
-export async function TheLoai(string) {
+const divtheloai = document.querySelector(".divtheloai");
+export async function TheLoai(string, divtheloai) {
+  let slug = "";
   try {
-    const divtheloai = document.querySelector(".divtheloai");
     const response = await axios.get("https://otruyenapi.com/v1/api/the-loai");
     response.data.data.items.forEach((items) => {
       const bttheloai = document.createElement("button");
@@ -278,26 +279,38 @@ document.body.addEventListener("click", function () {
   console.log(window.location.href);
 });
 //tim-kiem
-async function TimKiem() {
+export async function TimKiem(string) {
   const text = document.querySelector(".text");
   const but = document.querySelector(".but");
   but.addEventListener("click", function () {
-    const data = "tim-kiem";
-    console.log(text.value);
-    window.location.href = `src/theloai.html?data=${data}&page=1&keyword=${encodeURIComponent(
-      text.value
-    )}`;
+    if (text.value === "") {
+      if (text.style.width === "45vw") {
+        const data = "tim-kiem";
+        console.log(text.value);
+        window.location.href = `${string}theloai.html?data=${data}&page=1&keyword=${encodeURIComponent(
+          text.value
+        )}`;
+      } else {
+        text.style.width = "45vw";
+      }
+    } else {
+      const data = "tim-kiem";
+      console.log(text.value);
+      window.location.href = `${string}theloai.html?data=${data}&page=1&keyword=${encodeURIComponent(
+        text.value
+      )}`;
+    }
   });
   text.addEventListener("keyup", function (e) {
     if (e.key === "Enter") {
       const data = "tim-kiem";
       console.log(text.value);
-      window.location.href = `src/theloai.html?data=${data}&page=1&keyword=${encodeURIComponent(
+      window.location.href = `${string}theloai.html?data=${data}&page=1&keyword=${encodeURIComponent(
         text.value
       )}`;
     }
   });
 }
-TimKiem();
-TheLoai(string);
+TimKiem(string);
+TheLoai(string, divtheloai);
 fetchData();

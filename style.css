@@ -501,15 +501,17 @@ hr {
 }
 /* the loai */
 .theloai2 {
-  width: 50vw;
+  width: 40vw;
   visibility: hidden;
-  background-color: rgba(200, 169, 169, 0.801);
+  background-color: rgba(139, 129, 129, 0.801);
   position: absolute;
   border-radius: 20px;
+  transform: translate(10vw);
 }
 .theLoai {
   position: relative;
 }
+.divtheloai2,
 .divtheloai {
   display: flex;
   flex-wrap: wrap;
@@ -518,17 +520,26 @@ hr {
   justify-content: center;
   align-items: center;
 }
+
 .atheloai {
   cursor: pointer;
   display: flex;
   border: solid 1px black;
   border-radius: 20px;
   margin: 5px;
-  font-size: 1vw;
+
   width: 7vw;
-  height: 3vw;
+  height: 2vw;
   justify-content: center;
   align-items: center;
+}
+.ptheloai {
+  font-size: 0.8vw;
+  font-weight: 600;
+}
+.atheloai:hover {
+  background-color: black;
+  color: aliceblue;
 }
 /* theloai */
 .divTL {
@@ -548,6 +559,7 @@ hr {
   padding: 0.5vw;
   border-radius: 20px;
   cursor: pointer;
+  font-size: 1.5vw;
 }
 .divImg {
   margin: 0 auto;

@@ -33,6 +33,122 @@
     <title>Trang 2</title>
   </head>
   <body>
+    <div class="head">
+      <div class="logo">
+        <a href="#"><img src="/anh/Logo_TRUYEN_DL.svg" alt="" /></a>
+      </div>
+      <div class="taikhoan">
+        <div class="user_khach_hang">
+          <p class="name_khach_hang"><!--add name --></p>
+
+          <img
+            src="/anh/pngtree-black-default-avatar-png-image_5407174.jpg"
+            class="anh_dai_dien"
+            alt=""
+          />
+        </div>
+        <div class="tk1">
+          <p class="tk"><i class="fa-solid fa-circle-user"></i> Tài khoản</p>
+        </div>
+        <div class="login hide">
+          <p class="DN">Đăng nhập</p>
+          <hr />
+          <p class="DK">Đăng kí</p>
+        </div>
+        <div class="hide gddn">
+          <div class="formdn">
+            <i class="fa-solid fa-xmark x"></i>
+            <div class="log-in">
+              <p class="giaodien">Tai khoan</p>
+              <input
+                type="text"
+                placeholder="Nhap tai khoan"
+                required
+                class="dangnhap log submitdn"
+              />
+              <p class="giaodien">Mat khau</p>
+              <input
+                type="password"
+                placeholder="nhap mat khau"
+                required
+                class="dangnhap pass submitdn"
+              />
+              <button class="submit sdn">Đăng kí</button>
+            </div>
+          </div>
+        </div>
+        <!-- dang ki -->
+        <div class="hide gddk">
+          <div class="formdn">
+            <i class="fa-solid fa-xmark x"></i>
+            <div class="log-in">
+              <p class="giaodien">Full name</p>
+              <input
+                type="text"
+                placeholder="Nhap ten cua ban"
+                required
+                class="dangnhap fullname dangki"
+              />
+              <p class="giaodien">Tai khoan</p>
+              <input
+                type="text"
+                placeholder="Nhap tai khoan"
+                required
+                class="dangnhap log dangki"
+              />
+              <p class="giaodien">Mat khau</p>
+              <input
+                type="password"
+                placeholder="nhap mat khau"
+                required
+                class="dangnhap pass dangki"
+              />
+              <button class="submit sdk">Đăng kí</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <header class="header">
+      <div class="thanhphan">
+        <nav class="noidung">
+          <ul class="ul">
+            <li>
+              <a href="/index.html"><i class="fa-solid fa-house"></i></a>
+            </li>
+            <li><a href="#">Hot</a></li>
+            <li><a href="#">Theo Dõi</a></li>
+            <li><a href="#">Lịch Sử</a></li>
+            <li class="theLoaiover">
+              <a href="#" class="theLoai"
+                >Thể Loại
+                <div class="theloai2"><div class="divtheloai2"></div></div>
+              </a>
+            </li>
+            <li><a href="#">Xếp Hạng</a></li>
+            <li><a href="#">MANHWA</a></li>
+            <li><a href="#">ANIME</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- Tim kiem -->
+    <section id="search">
+      <div class="search">
+        <div class="csearch">
+          <input
+            type="text"
+            class="text"
+            placeholder="Search..."
+            name="text"
+            required
+          />
+          <button class="but">
+            <i id="i" class="fa-solid fa-magnifying-glass fa-fade fa-sm"></i>
+          </button>
+        </div>
+      </div>
+    </section>
     <!--  -->
     <div id="iidImg">
       <div class="divTL"></div>
@@ -58,7 +174,7 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+    <script src="/main.js"></script>
     <script src="/src/theloai.js" type="module"></script>
   </body>
 </html>
