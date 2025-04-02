@@ -1,4 +1,9 @@
-import { Trangdoctruyen, TimKiem, TheLoai } from "./Local_main.js";
+import {
+  Trangdoctruyen,
+  TimKiem,
+  TheLoai,
+  HienThiThongTin,
+} from "./Local_main.js";
 // import { hideTL } from "..tt.js";
 const diV = document.querySelector(".divTL");
 const urlParams = new URLSearchParams(window.location.search);
@@ -51,7 +56,6 @@ export function phanTrang(page) {
 
   arrayChild.forEach((item) => {
     console.log(item.thumb_url); //
-
     const creatDiv = document.createElement("div");
     creatDiv.classList.add("divImg");
 
@@ -66,6 +70,8 @@ export function phanTrang(page) {
     creatDiv.append(creatImg);
     diV.append(creatDiv);
     creatDiv.append(pCreat);
+
+    HienThiThongTin(item, creatImg);
     //
     Trangdoctruyen(item, pCreat);
   });
@@ -132,6 +138,8 @@ export function hideTL() {
     theloai2.style.transform = "translate(10vw)";
   });
 }
+//
+
 //tloai
 const divtheloai2 = document.querySelector(".divtheloai2");
 TimKiem(string);

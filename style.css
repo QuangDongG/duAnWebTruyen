@@ -548,11 +548,11 @@ hr {
   gap: 20px;
 }
 .imgtl {
-  width: 18vw;
-  height: 26vw;
+  width: 14vw;
+  height: 20vw;
 }
 .p2Creat {
-  width: 18vw;
+  width: 14vw;
   color: rgb(255, 255, 255);
   background-color: red;
   text-align: center;
@@ -567,4 +567,26 @@ hr {
 #iidImg {
   width: 80%;
   margin: 0 auto;
+}
+.divTT {
+  position: absolute;
+  width: 38vw;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.708);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.liTT {
+  margin: 1vw;
+}
+.divTTP {
+  display: flex;
+  margin: 1vw;
+}
+.pTT {
+  background-color: aqua;
+  padding: 0.3vw;
+  margin-right: 0.5vw;
+  border-radius: 8px;
+  font-size: 1vw;
 }

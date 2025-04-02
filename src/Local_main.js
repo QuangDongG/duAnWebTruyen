@@ -17,6 +17,8 @@ async function fetchData() {
     const response = await axios.get(
       "https://otruyenapi.com/v1/api/danh-sach/truyen-moi?page=1"
     );
+    console.log(response.data);
+
     const total = response.data.data.params.pagination.totalItems;
     let pagePromises = [];
     for (let page = 1; page <= 1; page++) {
@@ -24,7 +26,7 @@ async function fetchData() {
     }
     console.log(pagePromises.length);
 
-    const chunkSize = 2;
+    const chunkSize = 1;
     for (let i = 0; i < pagePromises.length; i += chunkSize) {
       await Promise.all(pagePromises.slice(i, i + chunkSize));
     }
@@ -78,6 +80,8 @@ export function phanTrang(page) {
     diV.append(creatDiv);
     creatDiv.append(pCreat);
     //
+    HienThiThongTin(item, creatImg);
+
     Trangdoctruyen(item, pCreat);
   });
 }
@@ -148,7 +152,7 @@ export function Trangdoctruyen(item, pCreat) {
   const phanChap = document.querySelector(".phanChap"); //phan chap
   //const luotThich = document.querySelector(".luotThich");
   // const pageTruyen = document.querySelector(".pageTruyen");
-  console.log(item.slug); //
+  console.log(item); //
   //trang truyen
   const thongTinTrang = document.querySelector(".thongTinTrang");
   const imgTrang = document.createElement("div");
@@ -191,6 +195,7 @@ export function Trangdoctruyen(item, pCreat) {
         //phan chap
         phanChap.textContent = "";
         ulChapter.classList.add("ulChapter");
+
         response.data.data.item.chapters[0].server_data.forEach(
           async (chapter) => {
             const divChap = document.createElement("div");
@@ -202,6 +207,7 @@ export function Trangdoctruyen(item, pCreat) {
             divChap.append("Chap:", nameChap);
 
             ulChapter.append(divChap);
+
             //phần truyện
             divChap.addEventListener("click", async function () {
               imgTrang.textContent = "";
@@ -309,6 +315,68 @@ export async function TimKiem(string) {
         text.value
       )}`;
     }
+  });
+}
+export function HienThiThongTin(item, creatImg) {
+  let divTT = document.querySelector(".divTT");
+  creatImg.addEventListener("mouseenter", async function () {
+    divTT.style.display = "flex";
+    try {
+      let ulTT = document.createElement("ul");
+      let divTTP = document.createElement("div");
+      divTTP.classList.add("divTTP");
+      divTT.append(ulTT);
+      let responseShip = await axios.get(
+        "https://otruyenapi.com/v1/api/truyen-tranh/" + item.slug
+      );
+      let tt = responseShip.data.data.seoOnPage.seoSchema;
+      let tl = responseShip.data.data.item.category;
+      tl.forEach((tl) => {
+        const pTT = document.createElement("p");
+        pTT.classList.add("pTT");
+        pTT.textContent = tl.name;
+        divTTP.append(pTT);
+      });
+      let chap;
+      if (responseShip.data.data.item.chapters.length > 0) {
+        chap =
+          responseShip.data.data.item.chapters[0].server_data[
+            responseShip.data.data.item.chapters[0].server_data.length - 1
+          ].chapter_name;
+      } else {
+        chap = "";
+      }
+      let str = responseShip.data.data.item.updatedAt.slice(0, 10);
+      const dataItems = [
+        "Tên truyện:" + tt.name,
+        "Chapter:" + chap,
+
+        "Tác giả:" + tt.director,
+        "Giới thiệu:" + responseShip.data.data.seoOnPage.descriptionHead,
+        "Uppdate:" + str,
+      ];
+
+      dataItems.forEach((itemData) => {
+        let liTT = document.createElement("li");
+        liTT.classList.add("liTT");
+        liTT.textContent = itemData; // Gán textContent vào li
+        ulTT.append(liTT); // Thêm li vào ul
+      });
+      ulTT.append(divTTP);
+      creatImg.addEventListener("mousemove", function (e) {
+        divTT.style.top = -80 + window.scrollY + e.clientY + "px";
+        divTT.style.left = 30 + e.clientX + "px";
+      });
+
+      document.body.append(divTT);
+    } catch (error) {
+      console.error("Có lỗi xảy ra khi lấy dữ liệu: ", error);
+    }
+  });
+
+  creatImg.addEventListener("mouseleave", function () {
+    divTT.textContent = "";
+    divTT.style.display = "none";
   });
 }
 TimKiem(string);
