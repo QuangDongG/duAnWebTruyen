@@ -60,21 +60,21 @@
           <div class="formdn">
             <i class="fa-solid fa-xmark x"></i>
             <div class="log-in">
-              <p class="giaodien">Tai khoan</p>
+              <p class="giaodien">Tài khoản</p>
               <input
                 type="text"
                 placeholder="Nhap tai khoan"
                 required
                 class="dangnhap log submitdn"
               />
-              <p class="giaodien">Mat khau</p>
+              <p class="giaodien">Mật khẩu</p>
               <input
                 type="password"
                 placeholder="nhap mat khau"
                 required
                 class="dangnhap pass submitdn"
               />
-              <button class="submit sdn">Đăng kí</button>
+              <button class="submit sdn">Đăng nhập</button>
             </div>
           </div>
         </div>
@@ -90,14 +90,14 @@
                 required
                 class="dangnhap fullname dangki"
               />
-              <p class="giaodien">Tai khoan</p>
+              <p class="giaodien">Tài khoản</p>
               <input
                 type="text"
                 placeholder="Nhap tai khoan"
                 required
                 class="dangnhap log dangki"
               />
-              <p class="giaodien">Mat khau</p>
+              <p class="giaodien">Mật khẩu</p>
               <input
                 type="password"
                 placeholder="nhap mat khau"
@@ -119,7 +119,10 @@
             </li>
             <li><a href="#">Hot</a></li>
             <li><a href="#">Theo Dõi</a></li>
-            <li><a href="#">Lịch Sử</a></li>
+            <li class="lichsu">
+              <a class="lichsua" href="#">Lịch Sử</a>
+              <div class="lichsudiv"><ul class="lichsuul"></ul></div>
+            </li>
             <li class="theLoaiover">
               <a href="#" class="theLoai"
                 >Thể Loại
@@ -209,6 +212,6 @@
     <script src="/tt.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/src/Local_main.js" type="module"></script>
-    <script src="/login.js"></script>
+    <!-- <script src="/login.js"></script> -->
   </body>
 </html>

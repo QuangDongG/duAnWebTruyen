@@ -4,7 +4,7 @@ import {
   TheLoai,
   HienThiThongTin,
 } from "./Local_main.js";
-// import { hideTL } from "..tt.js";
+
 const diV = document.querySelector(".divTL");
 const urlParams = new URLSearchParams(window.location.search);
 const countPage = 24;
