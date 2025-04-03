@@ -3,6 +3,10 @@ import {
   TimKiem,
   TheLoai,
   HienThiThongTin,
+  LichSu,
+  addTruyen,
+  bool,
+  luu_bien,
 } from "./Local_main.js";
 
 const diV = document.querySelector(".divTL");
@@ -70,6 +74,9 @@ export function phanTrang(page) {
     creatDiv.append(creatImg);
     diV.append(creatDiv);
     creatDiv.append(pCreat);
+    pCreat.addEventListener("click", function () {
+      LichSu(item, bool, luu_bien);
+    });
 
     HienThiThongTin(item, creatImg);
     //
@@ -139,9 +146,17 @@ export function hideTL() {
   });
 }
 //
-
+window.addEventListener("click", function () {
+  console.log(bool);
+  console.log(luu_bien);
+});
 //tloai
+const lichsuul = document.querySelector(".lichsuul2");
+const lichsua = document.querySelector(".lichsua2");
 const divtheloai2 = document.querySelector(".divtheloai2");
+document.addEventListener("DOMContentLoaded", function () {
+  addTruyen(lichsua, lichsuul);
+});
 TimKiem(string);
 hideTL();
 TheLoai(string, divtheloai2);

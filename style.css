@@ -593,7 +593,8 @@ hr {
 .lichsu {
   position: relative;
 }
-.lichsuul {
+.lichsuul,
+.lichsuul2 {
   width: 40vw;
   height: 40vw;
   background-color: rgba(0, 255, 255, 0.495);

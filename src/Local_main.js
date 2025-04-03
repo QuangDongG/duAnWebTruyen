@@ -105,8 +105,8 @@ submitdk.addEventListener("click", function (e) {
   count = 0;
 });
 //ktr đă nhập
-let bool = false;
-let luu_bien = "";
+export let bool = false;
+export let luu_bien = "";
 const tk1 = document.querySelector(".tk1");
 const user_khach_hang = document.querySelector(".user_khach_hang");
 const name_khach_hang = document.querySelector(".name_khach_hang");
@@ -235,7 +235,7 @@ export function phanTrang(page) {
     creatDiv.append(pCreat);
     //
     pCreat.addEventListener("click", function () {
-      LichSu(item);
+      LichSu(item, bool, luu_bien);
     });
 
     HienThiThongTin(item, creatImg);
@@ -538,7 +538,7 @@ export function HienThiThongTin(item, creatImg) {
   });
 }
 ///
-export function LichSu(item) {
+export function LichSu(item, bool, luu_bien) {
   let lichsu = [],
     yeuthich = [],
     theodoi = [],
@@ -562,10 +562,9 @@ export function LichSu(item) {
     }
   }
 }
-function addTruyen() {
-  const lichsuul = document.querySelector(".lichsuul");
-  const lichsua = document.querySelector(".lichsua");
-
+const lichsuul = document.querySelector(".lichsuul");
+const lichsua = document.querySelector(".lichsua");
+export function addTruyen(lichsua, lichsuul) {
   // Kiểm tra phần tử tồn tại trước khi thêm sự kiện
   if (lichsua && lichsuul) {
     lichsua.addEventListener("mouseover", function () {
@@ -601,13 +600,15 @@ function addTruyen() {
       lichsup.textContent = "Đọc Truyện";
       lichsuli.append(lichsuimg, lichsup);
       lichsuul.append(lichsuli);
+      let item = imgls.data.data.item;
+      Trangdoctruyen(item, lichsup);
     });
   }
 }
 
 // Gọi hàm khi DOM đã sẵn sàng
 document.addEventListener("DOMContentLoaded", function () {
-  addTruyen();
+  addTruyen(lichsua, lichsuul);
 });
 
 // window.addEventListener("click", function () {
