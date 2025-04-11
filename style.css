@@ -543,6 +543,7 @@ hr {
   }
   .upload {
     display: none;
+    width: 0 !important;
   }
   .tk1 {
     padding: 6px 12px;
@@ -617,7 +618,7 @@ hr {
 }
 .theloai2{
   left: -270px;
-  width: 400px;
+  width: 300px;
 
 }
   .h2 {
@@ -655,9 +656,17 @@ hr {
     height: 100% !important;
     overflow: auto;
     display: flex;
+ 
+  
   }
   .ulChapter{
     position: absolute;
     top: 280px;
+
   }
+  .lichsuul,
+.lichsuul2{
+  width: 300px;
+  left: -200px;
+}
 }

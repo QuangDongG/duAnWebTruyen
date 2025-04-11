@@ -224,6 +224,7 @@ async function fetchData() {
     diV.removeChild(loading);
     phanTrang(currentPage);
     numberPage(total);
+    TheLoaiDeXuat();
     Body();
   } catch (error) {
     console.error("Có lỗi xảy ra:", error);
@@ -836,6 +837,231 @@ async function Body() {
     slider.append(categorySection);
   }
 }
+function TheLoaiDeXuat() {
+  const sliderInner = document.querySelector(".slider-inner");
+  const noiDung = [
+    {
+      title: "",
+      name: "",
+      theloai: "",
+      slug: "",
+      img: "anhBia/1.jpg",
+      noidung: "",
+    },
+    {
+      title: "",
+      name: "",
+      theloai: "",
+      slug: "",
+      img: "anhBia/2.jpg",
+      noidung: "",
+    },
+    {
+      title: "",
+      name: "",
+      theloai: "",
+      slug: "",
+      img: "anhBia/3.jpg",
+      noidung: "",
+    },
+    {
+      title: "",
+      name: "",
+      theloai: "",
+      slug: "",
+      img: "anhBia/4.jpg",
+      noidung: "",
+    },
+    {
+      title: "",
+      name: "",
+      theloai: "",
+      slug: "",
+      img: "anhBia/5.jpg",
+      noidung: "",
+    },
+    {
+      title: "",
+      name: "",
+      theloai: "",
+      slug: "",
+      img: "anhBia/6.jpg",
+      noidung: "",
+    },
+    {
+      title: "",
+      name: "",
+      theloai: "",
+      slug: "",
+      img: "anhBia/7.jpg",
+      noidung: "",
+    },
+    {
+      title: "",
+      name: "",
+      theloai: "",
+      slug: "",
+      img: "anhBia/8.jpg",
+      noidung: "",
+    },
+    {
+      title: "",
+      name: "",
+      theloai: "",
+      slug: "",
+      img: "anhBia/9.jpg",
+      noidung: "",
+    },
+    {
+      title: "",
+      name: "",
+      theloai: "",
+      slug: "",
+      img: "anhBia/10.jpg",
+      noidung: "",
+    },
+  ];
+
+  // Hàm tạo 1 thẻ manga
+  function createMangaItem(
+    data,
+    isCenter = false,
+    nextTitle = "",
+    includeDesc = ""
+  ) {
+    const featuredManga = document.createElement("div");
+    featuredManga.classList.add("featured-manga");
+    if (isCenter) featuredManga.classList.add("center-manga");
+
+    const imgManga = document.createElement("img");
+    imgManga.src = data.img;
+    imgManga.alt = "Error";
+
+    const mangaStatus = document.createElement("div");
+    mangaStatus.classList.add("manga-status");
+    mangaStatus.textContent = data.name;
+
+    const mangaTitle = document.createElement("div");
+    mangaTitle.classList.add("manga-title");
+
+    const h3 = document.createElement("h3");
+    h3.textContent = ""; // nếu cần thêm tiêu đề chính
+
+    const p = document.createElement("p");
+    p.textContent = nextTitle || data.title;
+
+    mangaTitle.append(h3, p);
+
+    featuredManga.append(imgManga, mangaStatus, mangaTitle);
+
+    if (isCenter && includeDesc) {
+      const mangaDesc = document.createElement("div");
+      mangaDesc.classList.add("manga-desc");
+      mangaDesc.textContent = includeDesc;
+      featuredManga.appendChild(mangaDesc);
+    }
+
+    return featuredManga;
+  }
+
+  for (let i = 0; i < 10; i++) {
+    const sliderItem = document.createElement("div");
+    sliderItem.classList.add("slider-item");
+
+    const prevIndex = i === 0 ? 9 : i - 1;
+    const nextIndex = i === 9 ? 0 : i + 1;
+
+    // Truyện trước
+    sliderItem.appendChild(createMangaItem(noiDung[prevIndex]));
+
+    // Truyện chính giữa
+    sliderItem.appendChild(
+      createMangaItem(
+        noiDung[i],
+        true,
+        noiDung[nextIndex].title,
+        noiDung[i].noidung
+      )
+    );
+
+    // Truyện tiếp theo
+    sliderItem.appendChild(createMangaItem(noiDung[nextIndex]));
+
+    sliderInner.appendChild(sliderItem);
+  }
+  chucNang();
+}
+//
+function chucNang() {
+  const sliderInner = document.querySelector(".slider-inner");
+  const slides = document.querySelectorAll(".slider-item");
+  const dots = document.querySelectorAll(".slider-pagination .dot");
+  const prevBtn = document.querySelector(".slider-prev");
+  const nextBtn = document.querySelector(".slider-next");
+
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+
+  let autoSlideInterval;
+
+  function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+      const newIndex = (currentIndex + 1) % totalSlides;
+      goToSlide(newIndex);
+    }, 5000);
+  }
+
+  function stopAutoSlide() {
+    clearInterval(autoSlideInterval);
+  }
+
+  function goToSlide(index) {
+    sliderInner.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach((dot) => dot.classList.remove("active"));
+    if (dots[index]) dots[index].classList.add("active");
+    currentIndex = index;
+  }
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      stopAutoSlide();
+      goToSlide(index);
+      startAutoSlide();
+    });
+  });
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      stopAutoSlide();
+      const newIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      goToSlide(newIndex);
+      startAutoSlide();
+    });
+  }
+
+  // Sự kiện click nút next
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      stopAutoSlide();
+      const newIndex = (currentIndex + 1) % totalSlides;
+      goToSlide(newIndex);
+      startAutoSlide();
+    });
+  }
+
+  // Khởi tạo vị trí ban đầu và bắt đầu auto slide
+  goToSlide(0);
+  startAutoSlide();
+
+  // Dừng auto slide khi tab không được focus
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+      stopAutoSlide();
+    } else {
+      startAutoSlide();
+    }
+  });
+}
+//
 
 TimKiem(string);
 TheLoai(string, divtheloai);
