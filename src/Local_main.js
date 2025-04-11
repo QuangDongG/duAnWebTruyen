@@ -1,4 +1,5 @@
 ///
+let b = [];
 let count = 0;
 function checkPassword(password) {
   const hasUpperCase = /[A-Z]/.test(password);
@@ -122,8 +123,22 @@ submitdn.addEventListener("click", function (e) {
     ) {
       luu_bien = duyet;
       bool = true;
+      let lichSuTranga;
+      let love;
+      if (duyet.thongTinUser[0] === undefined) {
+        lichSuTranga = [];
+      } else {
+        lichSuTranga = duyet.thongTinUser[0];
+      }
+      if (duyet.thongTinUser[1] === undefined) {
+        love = [];
+      } else {
+        love = duyet.thongTinUser[1];
+      }
+      localStorage.setItem("love", JSON.stringify(love));
+      localStorage.setItem("lichSuTrang", JSON.stringify(lichSuTranga));
       localStorage.setItem("nguoiDunga", JSON.stringify(luu_bien));
-      localStorage.setItem("dungSai", bool);
+      localStorage.setItem("dungSai", JSON.stringify(bool));
     }
   });
   if (luu_bien === undefined) {
@@ -145,16 +160,38 @@ window.addEventListener("load", function () {
     tk1.style.display = "none";
     user_khach_hang.style.display = "flex";
     gddnhap.classList.add("hide");
+  } else {
+    tk1.style.display = "flex";
+    user_khach_hang.style.display = "none";
   }
 });
 window.addEventListener("click", function () {
-  console.log(luu_bien);
   console.log(bool);
+  console.log(luu_bien);
 });
 ///
+const logout = document.createElement("p");
+logout.classList.add("logout");
+logout.textContent = "Logout";
+user_khach_hang.append(logout);
+user_khach_hang.addEventListener("click", function () {
+  logout.style.display = "flex";
+  logout.addEventListener("click", function () {
+    luu_bien = "";
+    bool = false;
+    localStorage.setItem("nguoiDunga", JSON.stringify(luu_bien));
+    localStorage.setItem("dungSai", JSON.stringify(bool));
+    tk1.style.display = "flex";
+    user_khach_hang.style.display = "none";
+    logout.style.display = "none";
+  });
+  document.body.addEventListener("dblclick", function () {
+    logout.style.display = "none";
+  });
+});
 const diV = document.querySelector(".canchinh");
 const ulImg = document.querySelector(".ulImg");
-
+///
 let responseData = [];
 const countPage = 24;
 let currentPage = 1;
@@ -187,6 +224,7 @@ async function fetchData() {
     diV.removeChild(loading);
     phanTrang(currentPage);
     numberPage(total);
+    Body();
   } catch (error) {
     console.error("Có lỗi xảy ra:", error);
   }
@@ -228,13 +266,14 @@ export function phanTrang(page) {
     creatImg.src =
       "https://img.otruyenapi.com/uploads/comics/" + item.thumb_url;
     const pCreat = document.createElement("p");
-    pCreat.textContent = "Đọc Truyện";
+    pCreat.textContent = item.name;
     pCreat.classList.add("pCreat");
     creatDiv.append(creatImg);
     diV.append(creatDiv);
     creatDiv.append(pCreat);
     //
     pCreat.addEventListener("click", function () {
+      localStorage.setItem("userdn", JSON.stringify(luu_bien));
       LichSu(item, bool, luu_bien);
     });
 
@@ -245,16 +284,18 @@ export function phanTrang(page) {
 }
 
 export function numberPage(items) {
+  const spanImg = document.createElement("span");
   const totalPages = Math.ceil(items / countPage);
   ulImg.innerHTML = "";
-
+  ulImg.append(spanImg);
   for (let i = 0; i < totalPages; i++) {
     const liImg = document.createElement("a");
+    const divliImg = document.createElement("div");
     liImg.href = "#idImg";
     liImg.classList.add("liImg");
     liImg.textContent = String(i + 1);
     liImg.style.display = "none";
-
+    divliImg.append(liImg);
     let a = i + 1;
 
     if (a >= currentPage - 2 && a <= currentPage + 2) {
@@ -270,7 +311,7 @@ export function numberPage(items) {
     if (a === 1) {
       liImg.style.display = "flex";
     }
-    ulImg.append(liImg);
+    spanImg.append(divliImg);
 
     if (i === currentPage - 1) {
       liImg.classList.add("mauTrang");
@@ -298,7 +339,6 @@ export function numberPage(items) {
   }
 }
 export function Trangdoctruyen(item, pCreat) {
-  const pageTrang = document.querySelector(".pageTrang");
   const closed = document.querySelector(".close");
   const chitiet = document.querySelector(".thongTin");
   const phanChiTiet = document.querySelector(".phanThongTin");
@@ -317,39 +357,73 @@ export function Trangdoctruyen(item, pCreat) {
   imgTrang.classList.add("imgTrang");
   pCreat.addEventListener("click", async function () {
     const ulChapter = document.createElement("ul");
-    const h3 = document.createElement("h3");
-    h3.classList.add("h3");
-    h3.textContent = "Thể loại :";
+
     overlay.style.display = "flex";
     phanChiTiet.textContent = "";
     const ulChiTiet = document.createElement("ul");
     ulChiTiet.classList.add("ulChiTiet");
-    //const chapter = document.createElement("div");
+    const chapterli = document.createElement("li");
+    chapterli.classList.add("chapterli");
     const nameStory = document.createElement("li");
     nameStory.classList.add("nameStory");
-    nameStory.append(h3);
+
     const slug = await axios
       .get("https://otruyenapi.com/v1/api/truyen-tranh/" + item.slug)
       .then(function (response) {
         imgChiTiet.src =
           "https://img.otruyenapi.com/uploads/comics/" + item.thumb_url;
+        console.log(response.data.data);
 
-        response.data.data.breadCrumb.forEach((tl, index) => {
-          if (index === response.data.data.breadCrumb.length - 1) {
-            const h31 = document.createElement("h3");
-            h31.classList.add("h3");
-            h31.textContent = "Tên truyện :";
-            const nameT = document.createElement("li");
-            nameT.classList.add("nameStory");
-            nameT.append(h31);
-            nameT.append(tl.name);
-            ulChiTiet.append(nameT);
-          } else if (index === response.data.data.breadCrumb.length - 2) {
-            nameStory.append(tl.name);
-          } else {
-            nameStory.append(tl.name, ",");
-          }
+        let divTTP = document.createElement("div");
+        divTTP.classList.add("divTTP");
+
+        // divTT.append(ulTT);
+
+        let tt = response.data.data.seoOnPage.seoSchema;
+        let tl = response.data.data.item.category;
+        tl.forEach((tl) => {
+          const pTT = document.createElement("p");
+          pTT.classList.add("pTT");
+          pTT.textContent = tl.name;
+          divTTP.append(pTT);
         });
+        let chap;
+        if (response.data.data.item.chapters.length > 0) {
+          chap =
+            response.data.data.item.chapters[0].server_data[
+              response.data.data.item.chapters[0].server_data.length - 1
+            ].chapter_name;
+        } else {
+          chap = "";
+        }
+        let str = response.data.data.item.updatedAt.slice(0, 10);
+        const dataItems = [
+          "Tên truyện:" + tt.name,
+          "Chapter:" + chap,
+
+          "Tác giả:" + tt.director,
+          "Giới thiệu:" +
+            response.data.data.item.content.slice(
+              3,
+              response.data.data.item.content.length - 4
+            ),
+          "Uppdate:" + str,
+        ];
+
+        dataItems.forEach((itemData) => {
+          let liTT = document.createElement("li");
+          liTT.classList.add("liTTa");
+          liTT.textContent = itemData; // Gán textContent vào li
+          nameStory.append(liTT); // Thêm li vào ul
+        });
+        nameStory.append(divTTP);
+        //
+        //yêu thích
+        //
+
+        Tim(item, ulChiTiet);
+        //
+
         //phan chap
         phanChap.textContent = "";
         ulChapter.classList.add("ulChapter");
@@ -543,8 +617,9 @@ export function LichSu(item, bool, luu_bien) {
     yeuthich = [],
     theodoi = [],
     thich = [];
-
+  yeuthich = b;
   luu_bien.thongTinUser = [lichsu, yeuthich, theodoi, thich];
+  let luuTru = JSON.parse(localStorage.getItem("user")) || [];
   let luu = JSON.parse(localStorage.getItem("lichSuTrang")) || [];
   console.log(luu);
 
@@ -558,9 +633,18 @@ export function LichSu(item, bool, luu_bien) {
         "lichSuTrang",
         JSON.stringify(luu_bien.thongTinUser[0])
       );
-      console.log(luu_bien);
     }
   }
+  console.log(luu_bien);
+  let a = 0;
+  luuTru.forEach((luuTru, index) => {
+    if (luuTru.fullName === luu_bien.fullName) {
+      a = index;
+    }
+  });
+  luuTru[a] = luu_bien;
+  console.log(a);
+  localStorage.setItem("user", JSON.stringify(luuTru));
 }
 const lichsuul = document.querySelector(".lichsuul");
 const lichsua = document.querySelector(".lichsua");
@@ -582,7 +666,7 @@ export function addTruyen(lichsua, lichsuul) {
       lichsuul.textContent = "";
     });
   } else {
-    console.log("Các phần tử cần thiết không tồn tại trong DOM!");
+    console.log("KO có");
   }
 
   function ClickLichSu(luu_bien) {
@@ -606,15 +690,152 @@ export function addTruyen(lichsua, lichsuul) {
   }
 }
 
-// Gọi hàm khi DOM đã sẵn sàng
+function Tim(item, ulChiTiet) {
+  let luuTru = JSON.parse(localStorage.getItem("user")) || [];
+  let luu = JSON.parse(localStorage.getItem("love")) || [];
+  let a = 0;
+  let push = {
+    slug: item.slug,
+    dungsai: false,
+  };
+
+  luuTru.forEach((user, index) => {
+    if (user.fullName === luu_bien.fullName) {
+      a = index;
+    }
+  });
+
+  luuTru[a].thongTinUser[1] = [...luu];
+
+  let countlove = localStorage.getItem(`countlove-${item.slug}`)
+    ? parseInt(localStorage.getItem(`countlove-${item.slug}`))
+    : 0;
+
+  const divyeuthich = document.createElement("div");
+  divyeuthich.classList.add("divyeuthich");
+
+  const yeuthich = document.createElement("i");
+  yeuthich.classList.add("fa-solid", "fa-heart", "xoay");
+
+  const countDisplay = document.createElement("span");
+  countDisplay.textContent = `:${countlove}`;
+  let index = -1;
+  luuTru[a].thongTinUser[1].forEach((ex, index1) => {
+    if (ex.slug === item.slug) {
+      index = index1;
+    }
+  });
+  if (index !== -1) {
+    if (luuTru[a].thongTinUser[1][index].dungsai) {
+      yeuthich.classList.add("liked");
+    } else {
+      yeuthich.classList.remove("liked");
+    }
+  } else {
+    yeuthich.classList.remove("liked");
+  }
+  yeuthich.addEventListener("click", function () {
+    if (bool) {
+      let index = -1;
+      luuTru[a].thongTinUser[1].forEach((ex, index1) => {
+        if (ex.slug === item.slug) {
+          index = index1;
+        }
+      });
+
+      if (index !== -1) {
+        yeuthich.classList.toggle("liked");
+
+        let check = luuTru[a].thongTinUser[1][index].dungsai;
+
+        luuTru[a].thongTinUser[1][index].dungsai = !check;
+        if (yeuthich.classList.contains("liked")) {
+          countlove++;
+        } else {
+          countlove--;
+        }
+
+        localStorage.setItem("love", JSON.stringify(luuTru[a].thongTinUser[1]));
+      } else {
+        yeuthich.classList.toggle("liked");
+        push.dungsai = yeuthich.classList.contains("liked");
+
+        if (yeuthich.classList.contains("liked")) {
+          countlove++;
+        } else {
+          countlove--;
+        }
+        luuTru[a].thongTinUser[1].unshift(push);
+
+        localStorage.setItem("love", JSON.stringify(luuTru[a].thongTinUser[1]));
+        console.log(luuTru);
+      }
+      localStorage.setItem("user", JSON.stringify(luuTru));
+      b = luuTru[a].thongTinUser[1];
+      countDisplay.textContent = `:${countlove}`;
+      localStorage.setItem(`countlove-${item.slug}`, countlove);
+    }
+  });
+
+  divyeuthich.append(yeuthich, countDisplay);
+  ulChiTiet.append(divyeuthich);
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   addTruyen(lichsua, lichsuul);
 });
+//body
 
-// window.addEventListener("click", function () {
-//   console.log(luu_bien);
-// });
-///
+async function Body() {
+  let noiDungPhanTrang = ["ngon-tinh", "chuyen-sinh", "manhwa", "thieu-nhi"];
+  let theloaiBody = [
+    "Tình Yêu Viễn Tưởng",
+    "Thế Giới Khác",
+    "Truyện Hàn Quốc",
+    "Thiếu Nhi 13+",
+  ];
+  let slider = document.querySelector(".slider");
+  for (let i = 0; i < noiDungPhanTrang.length; i++) {
+    let categorySection = document.createElement("div");
+    categorySection.classList.add("category-section");
+    let sectionTitle = document.createElement("h2");
+    sectionTitle.classList.add("section-title");
+    let mangaGrid = document.createElement("div");
+
+    mangaGrid.classList.add("manga-grid");
+    let item = await axios.get(
+      "https://otruyenapi.com/v1/api/the-loai/" +
+        noiDungPhanTrang[i] +
+        "?page=1"
+    );
+    sectionTitle.innerHTML =
+      '<i class="fas fa-star sparkle-icon"></i> ' + theloaiBody[i];
+    for (let index = 0; index < item.data.data.items.length; index++) {
+      if (index === 7) break;
+
+      const items = item.data.data.items[index];
+
+      const creatDiv = document.createElement("div");
+      creatDiv.classList.add("manga-card");
+
+      const creatImg = document.createElement("img");
+
+      creatImg.src =
+        "https://img.otruyenapi.com/uploads/comics/" + items.thumb_url;
+
+      const pCreat = document.createElement("div");
+      pCreat.textContent = items.name;
+      pCreat.classList.add("manga-card-title");
+
+      creatDiv.append(creatImg, pCreat);
+      mangaGrid.append(creatDiv);
+      Trangdoctruyen(items, pCreat);
+    }
+
+    categorySection.append(sectionTitle, mangaGrid);
+    slider.append(categorySection);
+  }
+}
 
 TimKiem(string);
 TheLoai(string, divtheloai);

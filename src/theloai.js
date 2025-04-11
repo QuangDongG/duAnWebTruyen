@@ -69,7 +69,7 @@ export function phanTrang(page) {
     creatImg.src =
       "https://img.otruyenapi.com/uploads/comics/" + item.thumb_url;
     const pCreat = document.createElement("p");
-    pCreat.textContent = "Đọc Truyện";
+    pCreat.textContent = item.name;
     pCreat.classList.add("p2Creat");
     creatDiv.append(creatImg);
     diV.append(creatDiv);

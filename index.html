@@ -23,6 +23,7 @@
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="css.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -63,17 +64,20 @@
               <p class="giaodien">Tài khoản</p>
               <input
                 type="text"
-                placeholder="Nhap tai khoan"
+                placeholder="Nhập tài khoản"
                 required
                 class="dangnhap log submitdn"
               />
               <p class="giaodien">Mật khẩu</p>
               <input
                 type="password"
-                placeholder="nhap mat khau"
+                placeholder="Nhập mật khẩu"
                 required
                 class="dangnhap pass submitdn"
               />
+              <div class="form-footer">
+                Chưa có tài khoản? <span class="form-link">Đăng ký ngay</span>
+              </div>
               <button class="submit sdn">Đăng nhập</button>
             </div>
           </div>
@@ -130,8 +134,8 @@
               </a>
             </li>
             <li><a href="#">Xếp Hạng</a></li>
-            <li><a href="#">MANHWA</a></li>
-            <li><a href="#">ANIME</a></li>
+            <li><a href="#" class="manhwu">MANHWA</a></li>
+            <li><a href="#" class="anime">ANIME</a></li>
           </ul>
         </nav>
       </div>
@@ -157,8 +161,9 @@
     <div class="tpbody">
       <div class="body">
         <div class="section">
-          <h2 class="h2">
-            Truyện đề cử <i class="fa-solid fa-arrow-right"></i>
+          <h2 class="h2" style="position: relative; bottom: -0.8em">
+            Truyện đề cử
+            <i class="fa-solid fa-arrow-right" style=""></i>
           </h2>
           <section class="truyennew">
             <!-- add truyen vao tt -->
@@ -183,17 +188,18 @@
       <div class="danhsachchinh">
         <div class="danhsach">
           <h2 class="mcn" id="idImg">Truyện mới cập nhật</h2>
-          <hr />
+          <hr style="margin-bottom: 1em" />
           <div class="canchinh"></div>
           <ul class="ulImg"></ul>
         </div>
-        <div class="upload"></div>
+        <div class="upload"><canvas id="canvas"></canvas></div>
       </div>
     </div>
     <div class="overlay" id="overlay">
       <div class="iframe-container">
         <div class="thongTin">
           <div class="phanThongTin"></div>
+
           <hr />
           <div class="phanChap"></div>
         </div>
@@ -208,10 +214,75 @@
       </div>
     </div>
     <div class="divTT"></div>
+    <!--  -->
+    <div class="container">
+      <div class="sliderBody">
+        <div class="slider">
+          <!-- add Truyen -->
+        </div>
+        <div class="sliderArrow">
+       
+          <div class="slider-control slider-prev">
+            <i class="fas fa-chevron-left"></i>
+          </div>
+          <div class="slider-inner">
+            <!-- Slide 1 -->
+            <div class="slider-item">
+              <div class="featured-manga">
+                <img src="/manhwa/2.jpg" alt="Manga cover" />
+                <div class="manga-status">Chủ nhân ma cà rồng</div>
+                <div class="manga-title">
+                  <p>Vừa sạch sẽ, lãng mạn</p>
+                </div>
+              </div>
+  
+              <div
+                class="center-manga featured-manga"
+              >
+              <img src="/manhwa/1.jpg" alt="Manga cover" />
+                <div class="manga-status">Đã Full</div>
+                <div class="manga-title">
+                  <h3>Thám Tử</h3>
+                  <p>- Song Tử -</p>
+                </div>
+                <div class="manga-desc">
+                  Hãy giúp tôi, tôi sẽ làm bất thứ điều gì anh muốn, cho anh tất
+                  cả những gì tôi có. "Có biết làm những gì?" "Anh muốn tôi làm
+                  gì, tôi sẽ làm cái đó?" "Làm tình, có biết không?"
+                </div>
+              </div>
+  
+              <div class="featured-manga">
+                <img src="/manhwa/3.jpg" alt="Manga cover" />
+                <div class="manga-status">Full</div>
+                <div class="manga-title">
+                  <h3>Em là tất cả của tôi, Cô gái à!</h3>
+                  <p>- Cô gái nhỏ bé -</p>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="slider-control slider-next">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+        </div>
+
+      <div class="slider-pagination">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      </div>
+    </div>
     <script src="/main.js"></script>
     <script src="/tt.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/src/Local_main.js" type="module"></script>
+    <!-- <script src="/heart.js"></script> -->
     <!-- <script src="/login.js"></script> -->
   </body>
 </html>
