@@ -788,13 +788,47 @@ document.addEventListener("DOMContentLoaded", function () {
 //body
 
 async function Body() {
-  let noiDungPhanTrang = ["ngon-tinh", "chuyen-sinh", "manhwa", "thieu-nhi"];
+  let noiDungPhanTrang = [
+    "ngon-tinh",
+    "chuyen-sinh",
+    "manhwa",
+    "thieu-nhi",
+    "adult",
+    "comedy",
+    "co-dai",
+    "doujinshi",
+    "drama",
+    "shoujo-ai",
+    "trinh-tham",
+  ];
   let theloaiBody = [
     "Tình Yêu Viễn Tưởng",
     "Thế Giới Khác",
-    "Truyện Hàn Quốc",
-    "Thiếu Nhi 13+",
+    "Truyện Tranh Hàn Quốc",
+    "Ước Mơ Tuổi Thơ",
+    "Thế giới người lớn",
+    "Cười thả ga",
+    "Về miền ký ức",
+    "Sáng tạo không giới hạn",
+    "Kịch tính nghẹt thở",
+    "Tình yêu thiếu nữ",
+    "Lật mở vụ án",
   ];
+  let font = [
+    '<i class="fa-solid fa-heart" style="color: #ffadce;"></i>',
+    '<i class="fa-brands fa-studiovinari" style="color: #FFD43B;"></i>',
+    '<i class="fas fa-star sparkle-icon"></i> ',
+    '<i class="fa-brands fa-odysee" style="color: #B197FC;"></i>',
+    '<i class="fa-brands fa-bluesky"></i>',
+    '<i class="fa-brands fa-themeisle"></i>',
+    '<i class="fa-brands fa-fly" style="color: #B197FC;"></i>',
+    '<i class="fas fa-pen-nib"  style="color: #7089b2;"></i>',
+    '<i class="fas fa-theater-masks" style="color: #ef9b4e;"></i>',
+    '<i class="fas fa-venus-double" style="color: #f59999;"></i>',
+    '<i class="fas fa-user-secret" style="color: #935806;"></i>',
+  ];
+  let sliderFoot = document.querySelector(".sliderFoot");
+  let sliderFootTour = document.querySelector(".sliderFootTour");
   let slider = document.querySelector(".slider");
   for (let i = 0; i < noiDungPhanTrang.length; i++) {
     let categorySection = document.createElement("div");
@@ -810,7 +844,10 @@ async function Body() {
         "?page=1"
     );
     sectionTitle.innerHTML =
-      '<i class="fas fa-star sparkle-icon"></i> ' + theloaiBody[i];
+      font[i] + theloaiBody[i] + '<p class="xemthem">Xem thêm</p>';
+    if (i === 0) {
+      categorySection.classList.add("trangTri");
+    }
     for (let index = 0; index < item.data.data.items.length; index++) {
       if (index === 7) break;
 
@@ -834,91 +871,111 @@ async function Body() {
     }
 
     categorySection.append(sectionTitle, mangaGrid);
-    slider.append(categorySection);
+    if (i < 4) {
+      slider.append(categorySection);
+    } else if (i >= 4 && i < 7) {
+      sliderFoot.append(categorySection);
+    } else {
+      sliderFootTour.append(categorySection);
+    }
+    const xemThem = Array.from(document.querySelectorAll(".xemthem"));
+    xemThem[i].addEventListener("click", function () {
+      window.location.href = `/src/theloai.html?data=${encodeURIComponent(
+        noiDungPhanTrang[i]
+      )}&page=1`;
+    });
   }
 }
-function TheLoaiDeXuat() {
+async function TheLoaiDeXuat() {
   const sliderInner = document.querySelector(".slider-inner");
   const noiDung = [
     {
-      title: "",
-      name: "",
-      theloai: "",
-      slug: "",
+      title: "Tiểu thuyết/truyện lãng mạn",
+      name: "Dưới Tán Lá Rơi",
+      theloai: "Ngôn Tình",
+      slug: "ngon-tinh",
       img: "anhBia/1.jpg",
-      noidung: "",
+      noidung:
+        " Tiểu thuyết hoặc truyện lãng mạn, thường có yếu tố kịch tính và tập trung vào mối quan hệ tình cảm.",
     },
     {
-      title: "",
-      name: "",
-      theloai: "",
-      slug: "",
+      title: "Võ thuật, chiến đấu",
+      name: "Chiến Tranh Fantasy",
+      theloai: "Martial Arts",
+      slug: "martial-arts",
       img: "anhBia/2.jpg",
-      noidung: "",
+      noidung:
+        "Tập trung vào các môn võ thuật, kỹ năng chiến đấu, và triết lý võ đạo",
     },
     {
-      title: "",
-      name: "",
-      theloai: "",
-      slug: "",
+      title: "Thế giới phép thuật, sinh vật huyền bí",
+      name: " Noragami",
+      theloai: "Thế Giới Huyền Ảo",
+      slug: "fantasy",
       img: "anhBia/3.jpg",
-      noidung: "",
+      noidung:
+        "Thế giới giả tưởng với phép thuật, quái vật, các chủng tộc hư cấu, và thường có những cuộc chiến giữa thiện và ác.",
     },
     {
-      title: "",
-      name: "",
-      theloai: "",
-      slug: "",
+      title: "Siêu nhiên, ma quỷ",
+      name: " Công chúa Mononoke",
+      theloai: "Supernatural",
+      slug: "supernatural",
       img: "anhBia/4.jpg",
-      noidung: "",
+      noidung: "Chứa các yếu tố siêu nhiên như ma quỷ, thần thánh, phép thuật",
     },
     {
-      title: "",
-      name: "",
-      theloai: "",
-      slug: "",
+      title: "Dành cho trẻ em",
+      name: "okohama Kaidashi Kikou",
+      theloai: "Thiếu Nhi",
+      slug: "thieu-nhi",
       img: "anhBia/5.jpg",
-      noidung: "",
+      noidung: "Nội dung dành cho trẻ em,tuổi thơ của vô số trẻ em",
     },
     {
-      title: "",
-      name: "",
-      theloai: "",
-      slug: "",
+      title: "Phiêu lưu, khám phá, thử thách",
+      name: "Sword Art Online",
+      theloai: "Adventure",
+      slug: "adventure",
       img: "anhBia/6.jpg",
-      noidung: "",
+      noidung:
+        "Kể về những cuộc phiêu lưu, hành trình khám phá những vùng đất mới, tìm kiếm kho báu, hoặc đối mặt với những thử thách nguy hiểm",
     },
     {
-      title: "",
-      name: "",
-      theloai: "",
-      slug: "",
+      title: "Cảm xúc, xung đột, mối quan hệ phức tạp",
+      name: "Mèo và Góc Phố Xanh",
+      theloai: "Drama",
+      slug: "drama",
       img: "anhBia/7.jpg",
-      noidung: "",
+      noidung:
+        "Tập trung vào các mối quan hệ phức tạp, cảm xúc sâu sắc, và những xung đột trong cuộc sống của nhân vật.",
     },
     {
-      title: "",
-      name: "",
-      theloai: "",
-      slug: "",
+      title: "Bối cảnh lịch sử có thật",
+      name: "Attack On Titan",
+      theloai: "Chính Trị,Lịch Sử",
+      slug: "historical",
       img: "anhBia/8.jpg",
-      noidung: "",
+      noidung:
+        "Lấy bối cảnh dựa trên các sự kiện, nhân vật hoặc thời kỳ lịch sử có thật.",
     },
     {
-      title: "",
-      name: "",
-      theloai: "",
-      slug: "",
+      title: "Điều tra tội phạm, phá án",
+      name: "A Haunting in Venice",
+      theloai: "Trinh-Thám",
+      slug: "trinh-tham",
       img: "anhBia/9.jpg",
-      noidung: "",
+      noidung:
+        "Tập trung vào việc điều tra tội phạm và tìm ra hung thủ,thường không có các yếu tối tình cảm",
     },
     {
-      title: "",
-      name: "",
-      theloai: "",
-      slug: "",
+      title: "Một nam chính, nhiều nữ thích,và ngược lại",
+      name: "Ánh Sao Định Mệnh và Ba Chàng Hoàng Tử",
+      theloai: "Harem",
+      slug: "harem",
       img: "anhBia/10.jpg",
-      noidung: "",
+      noidung:
+        "Một nhân vật nam chính được nhiều nhân vật nữ yêu thích và vây quanh",
     },
   ];
 
@@ -945,7 +1002,7 @@ function TheLoaiDeXuat() {
     mangaTitle.classList.add("manga-title");
 
     const h3 = document.createElement("h3");
-    h3.textContent = ""; // nếu cần thêm tiêu đề chính
+    h3.textContent = data.theloai;
 
     const p = document.createElement("p");
     p.textContent = nextTitle || data.title;
@@ -960,7 +1017,12 @@ function TheLoaiDeXuat() {
       mangaDesc.textContent = includeDesc;
       featuredManga.appendChild(mangaDesc);
     }
-
+    imgManga.addEventListener("click", function () {
+      console.log(data.slug);
+      window.location.href = `/src/theloai.html?data=${encodeURIComponent(
+        data.slug
+      )}&page=1`;
+    });
     return featuredManga;
   }
 
@@ -971,24 +1033,15 @@ function TheLoaiDeXuat() {
     const prevIndex = i === 0 ? 9 : i - 1;
     const nextIndex = i === 9 ? 0 : i + 1;
 
-    // Truyện trước
     sliderItem.appendChild(createMangaItem(noiDung[prevIndex]));
-
-    // Truyện chính giữa
     sliderItem.appendChild(
-      createMangaItem(
-        noiDung[i],
-        true,
-        noiDung[nextIndex].title,
-        noiDung[i].noidung
-      )
+      createMangaItem(noiDung[i], true, noiDung[i].title, noiDung[i].noidung)
     );
-
-    // Truyện tiếp theo
     sliderItem.appendChild(createMangaItem(noiDung[nextIndex]));
 
     sliderInner.appendChild(sliderItem);
   }
+
   chucNang();
 }
 //

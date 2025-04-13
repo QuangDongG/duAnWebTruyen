@@ -1,4 +1,27 @@
 
+a .return{
+  color: #000000;
+}
+.return div{
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  border: solid 2px black;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+.return div i{
+font-size: 1.5em;
+}
+.return{
+
+  position: fixed;
+z-index: 2;
+bottom: 20px;
+right: 20px;
+}
 :root {
   --primary-gradient: white
   --text-light: #ffffff;
@@ -14,13 +37,13 @@
   --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-img {
-  border-radius: 5px;
-}
+
 
 .logo a img {
   width: 14vw;
   height: 6vw;
+  min-height: 50px;
+  min-width: 150px;
 }
 
 
@@ -41,7 +64,7 @@ img {
   margin-top: 5px;
 }
 .body {
-  
+  margin-top: 20px;
   width: 80%;
 }
 /* tim kiem */
@@ -125,13 +148,15 @@ img {
   text-decoration: none;
   color: white;
   height: 3vw;
+  min-width: 80px;
+  min-height: 30px;
   border-radius: 30px;
   background-color: red;
   position: absolute;
   right: 3px;
   bottom: 5px;
   width: 8vw;
-  font-size: 1.5vw;
+  font-size: 1em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -231,18 +256,18 @@ align-items: center;
   background: rgba(0, 0, 0, 0.605);
 }
 .pCreat {
-  width: 12vw;
+  width: 100%;
   display: block;
   cursor: pointer;
   color: rgb(0, 0, 0);
-  padding: 0.5vw;
+  padding: 0.2em;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
   text-align: center;
-  font-size: 1.2vw;
+  font-size: 0.8em;
   overflow: hidden;
-  white-space: nowrap; /* Ngăn văn bản xuống dòng */
-  text-overflow: ellipsis; /* Hiển thị dấu ba chấm khi tràn */
+  white-space: nowrap; 
+  text-overflow: ellipsis; 
 }
 .pCreat:hover{
   color: rgb(251, 161, 51);
@@ -559,12 +584,14 @@ hr {
     height: 40px;
     font-size: 0.9rem;
   }
+.body{
+margin-top: 20px;
+  width: 100%;
+}
 
-  .img {
-    width: 130px;
-    height: 195px;
-  }
-
+.danhsachchinh{
+  width: 100% !important;
+}
   .liImg {
     font-size: 0.8rem;
     padding: 6px 12px;

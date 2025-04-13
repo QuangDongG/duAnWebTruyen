@@ -35,6 +35,9 @@
     <title>Truyen DL</title>
   </head>
   <body>
+    <a href="#"><div class="return">
+      <div><i class="fa-solid fa-arrow-up"></i></div>
+    </div></a>
     <div class="head">
       <div class="logo">
         <a href="#"><img src="/anh/Logo_TRUYEN_DL.svg" alt="" /></a>
@@ -192,7 +195,50 @@
           <div class="canchinh"></div>
           <ul class="ulImg"></ul>
         </div>
-        <div class="upload"><canvas id="canvas"></canvas></div>
+        <div class="upload"><div class="containerBXH">
+          <!-- Rankings Section -->
+          <div class="sectionBXH">
+              <div class="section-header-bxh">
+                  <div class="vertical-line"></div>
+                  <h2 class="section-title-bxh">Đọc Gì Hôm Nay?</h2>
+              </div>
+              
+              <div class="tabs">
+                  <div class="tab">Truyện Hot</div>
+                  <div class="tab actived">Chuẩn Bị Ra Lò</div>
+              </div>
+              
+              <div class="content-list" id="content-list">
+                  <!-- Content items will be loaded here with JavaScript -->
+              </div>
+              
+              <div class="view-more">
+                  <a href="#">
+                      Xem thêm BXH
+                      <i class="fa-solid fa-arrow-right"></i>
+                  </a>
+              </div>
+          </div>
+          
+          <!-- Comments Section -->
+          <div class="section">
+              <div class="section-header">
+                  <div class="vertical-line"></div>
+                  <h2 class="section-title">BÌNH LUẬN MỚI</h2>
+              </div>
+              
+              <div id="comments-list">
+                  <!-- Comments will be loaded here with JavaScript -->
+              </div>
+              
+              <div class="view-more">
+                  <a href="#">
+                      Xem thêm bình luận
+                      <i class="fa-solid fa-arrow-right"></i>
+                  </a>
+              </div>
+          </div>
+      </div></div>
       </div>
     </div>
     <div class="overlay" id="overlay">
@@ -247,12 +293,60 @@
           <div class="dot"></div>
         </div>
         </div>
+        <div class="sliderFoot"></div>
       </div>
     </div>
+   <!-- de cu -->
+   <div class="headed">
+    <div class="logod">
+        <div class="titled"></div>
+        Đề Cử Days
+    </div>
+</div>
+
+<div class="content">
+    <div class="comic-image">
+        <img src="/anhBia/1.jpg" alt="Đóa Hoa Đời Lấp Một Đời">
+        <div class="age">13+</div> 
+    </div>
+    
+    <div class="comic-info">
+        <div class="title-logo">
+            <div class="name-text">Đóa Hoa Đời Lấp<br>Một Đời</div>
+        </div>
+        
+        <div class="info-section">
+            <div class="info-TG">Tác Giả:</div>
+            <div class="info-value">Homil</div>
+        </div>
+        
+        <div class="info-section">
+            <div class="info-TG">Thể Loại:</div>
+            <div class="info-value"><span class="genre">Tình Cảm, Giả Tưởng</span></div>
+        </div>
+        
+        <div class="content-story">
+            Park Haewon theo đuổi chuyên ngành thực vật học và có công việc ở 
+            viện bảo tàng di tích lịch sử tự nhiên ở Mông Cổ. Mọi chuyện với cô đều 
+            diễn ra suôn sẻ cho tới khi Haewon nhận được tin mình mắc một căn 
+            bệnh nan y và chỉ còn 6 tháng để sống....
+        </div>
+        
+        <div class="action-buttons">
+            <button class="discover-btn">KHÁM PHÁ NGAY</button>
+            <button class="like-btn"><i class="fa-solid fa-plus"></i> YÊU THÍCH</button>
+        </div>
+    </div>
+</div>
+
+<div class="container"><div class="sliderFootTour"></div></div>
+
+
     <script src="/main.js"></script>
     <script src="/tt.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/src/Local_main.js" type="module"></script>
+    <script src="/BXH.js" type="module"></script>
     <!-- <script src="/heart.js"></script> -->
     <!-- <script src="/login.js"></script> -->
   </body>
