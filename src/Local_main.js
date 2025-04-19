@@ -349,8 +349,6 @@ export function Trangdoctruyen(item, pCreat) {
   const close = document.querySelector(".close-btn");
 
   const phanChap = document.querySelector(".phanChap"); //phan chap
-  //const luotThich = document.querySelector(".luotThich");
-  // const pageTruyen = document.querySelector(".pageTruyen");
   console.log(item); //
   //trang truyen
   const thongTinTrang = document.querySelector(".thongTinTrang");
@@ -378,8 +376,6 @@ export function Trangdoctruyen(item, pCreat) {
         let divTTP = document.createElement("div");
         divTTP.classList.add("divTTP");
 
-        // divTT.append(ulTT);
-
         let tt = response.data.data.seoOnPage.seoSchema;
         let tl = response.data.data.item.category;
         tl.forEach((tl) => {
@@ -401,7 +397,6 @@ export function Trangdoctruyen(item, pCreat) {
         const dataItems = [
           "Tên truyện:" + tt.name,
           "Chapter:" + chap,
-
           "Tác giả:" + tt.director,
           "Giới thiệu:" +
             response.data.data.item.content.slice(
@@ -418,71 +413,56 @@ export function Trangdoctruyen(item, pCreat) {
           nameStory.append(liTT); // Thêm li vào ul
         });
         nameStory.append(divTTP);
-        //
-        //yêu thích
-        //
 
         Tim(item, ulChiTiet);
-        //
 
         //phan chap
         phanChap.textContent = "";
         ulChapter.classList.add("ulChapter");
+        //chap_choice
+        const choice_chap = document.createElement("select");
+        choice_chap.classList.add("choice-chap");
+        //hightlight
+        const chapters = response.data.data.item.chapters[0].server_data;
+        const divChapList = [];
+        const optionChapList = [];
+        chapters.forEach(async (chapter, index) => {
+          const option_chap = document.createElement("option");
+          option_chap.classList.add("option-chap");
+          option_chap.textContent = "Chap:" + chapter.chapter_name;
+          choice_chap.append(option_chap);
+          optionChapList.push(option_chap);
+          //
+          const divChap = document.createElement("div");
+          divChap.classList.add("divChap");
+          divChapList.push(divChap);
+          const nameChap = document.createElement("li");
+          nameChap.classList.add("nameChap");
+          nameChap.textContent = chapter.chapter_name;
+          divChap.append("Chap:", nameChap);
 
-        response.data.data.item.chapters[0].server_data.forEach(
-          async (chapter) => {
-            const divChap = document.createElement("div");
-            divChap.classList.add("divChap");
-
-            const nameChap = document.createElement("li");
-            nameChap.classList.add("nameChap");
-            nameChap.textContent = chapter.chapter_name;
-            divChap.append("Chap:", nameChap);
-
-            ulChapter.append(divChap);
-
-            //phần truyện
-            divChap.addEventListener("click", async function () {
-              imgTrang.textContent = "";
-              pageTrang.style.display = "flex";
-              const update = await axios
-                .get(chapter.chapter_api_data)
-                .then(function (response) {
-                  response.data.data.item.chapter_image.forEach((img) => {
-                    const imgTrangTruyen = document.createElement("img");
-                    imgTrangTruyen.classList.add("imgTrangTruyen");
-                    imgTrangTruyen.src =
-                      response.data.data.domain_cdn +
-                      "/" +
-                      response.data.data.item.chapter_path +
-                      "/" +
-                      img.image_file;
-                    imgTrang.append(imgTrangTruyen);
-                  });
-                })
-                .catch((error) => {
-                  console.error("Có lỗi xảy ra:", error);
-                });
-              thongTinTrang.append(imgTrang);
-            });
-            closed.addEventListener("click", function () {
-              pageTrang.style.display = "none";
-              imgTrang.textContent = "";
-            });
-            //
-          }
-        );
+          ulChapter.append(divChap);
+          //click-chap
+          divChap.addEventListener("click", function () {
+            const chapterUrl = `/trangtruyen/trangtruyen.html?slug=${item.slug}&chapter=${chapter.chapter_name}&index=${index}`;
+            window.open(chapterUrl, "_blank");
+          });
+          //choi-chap
+          choice_chap.addEventListener("change", function () {
+            const selectedIndex = choice_chap.selectedIndex;
+            const selectedChapter = chapters[selectedIndex];
+            const chapterUrl = `/trangtruyen/trangtruyen.html?slug=${item.slug}&chapter=${selectedChapter.chapter_name}&index=${selectedIndex}`;
+            window.location.href = chapterUrl;
+          });
+        });
       })
       .catch((error) => {
         console.error("Có lỗi xảy ra:", error);
       });
-
     ulChiTiet.append(nameStory);
     phanChiTiet.append(imgChiTiet);
     phanChiTiet.append(ulChiTiet);
     phanChap.append(ulChapter);
-    thongTinTrang.append(imgTrang);
-    //
   });
   close.addEventListener("click", function () {
     overlay.style.display = "none";
@@ -788,6 +768,9 @@ document.addEventListener("DOMContentLoaded", function () {
 //body
 
 async function Body() {
+  let sothich = JSON.parse(localStorage.getItem("dulieu")) || ["harem"];
+
+  const random = Math.floor(Math.random() * sothich.length);
   let noiDungPhanTrang = [
     "ngon-tinh",
     "chuyen-sinh",
@@ -800,6 +783,7 @@ async function Body() {
     "drama",
     "shoujo-ai",
     "trinh-tham",
+    sothich[random],
   ];
   let theloaiBody = [
     "Tình Yêu Viễn Tưởng",
@@ -813,6 +797,7 @@ async function Body() {
     "Kịch tính nghẹt thở",
     "Tình yêu thiếu nữ",
     "Lật mở vụ án",
+    "Đề xuất theo sở thích của bạn",
   ];
   let font = [
     '<i class="fa-solid fa-heart" style="color: #ffadce;"></i>',
@@ -826,6 +811,7 @@ async function Body() {
     '<i class="fas fa-theater-masks" style="color: #ef9b4e;"></i>',
     '<i class="fas fa-venus-double" style="color: #f59999;"></i>',
     '<i class="fas fa-user-secret" style="color: #935806;"></i>',
+    "",
   ];
   let sliderFoot = document.querySelector(".sliderFoot");
   let sliderFootTour = document.querySelector(".sliderFootTour");
@@ -1114,6 +1100,7 @@ function chucNang() {
     }
   });
 }
+
 //
 
 TimKiem(string);

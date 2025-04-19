@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="stylesheet" href="/random/style.css" />
+    <link rel="stylesheet" href="/css.css">
+    <link rel="stylesheet" href="/style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Random Bao Uy Tín</title>
+  <body>
+    <a href="#body"><div class="return">
+      <div><i class="fa-solid fa-arrow-up"></i></div>
+    </div></a>
+    <div class="head">
+      <div class="logo">
+        <a href="#"><img src="/anh/TRUTRAGUBA.png" alt="" /></a>
+      </div>
+      <div class="taikhoan">
+        <div class="user_khach_hang">
+          <p class="name_khach_hang"><!--add name --></p>
+
+          <img
+            src="/anh/pngtree-black-default-avatar-png-image_5407174.jpg"
+            class="anh_dai_dien"
+            alt=""
+          />
+        </div>
+        <div class="tk1">
+          <p class="tk"><i class="fa-solid fa-circle-user"></i> Tài khoản</p>
+        </div>
+        <div class="login hide">
+          <p class="DN">Đăng nhập</p>
+          <hr />
+          <p class="DK">Đăng kí</p>
+        </div>
+        <div class="hide gddn">
+          <div class="formdn">
+            <i class="fa-solid fa-xmark x"></i>
+            <div class="log-in">
+              <p class="giaodien">Tài khoản</p>
+              <input
+                type="text"
+                placeholder="Nhập tài khoản"
+                required
+                class="dangnhap log submitdn"
+              />
+              <p class="giaodien">Mật khẩu</p>
+              <input
+                type="password"
+                placeholder="Nhập mật khẩu"
+                required
+                class="dangnhap pass submitdn"
+              />
+              <div class="form-footer">
+                Chưa có tài khoản? <span class="form-link">Đăng ký ngay</span>
+              </div>
+              <button class="submit sdn">Đăng nhập</button>
+            </div>
+          </div>
+        </div>
+        <!-- dang ki -->
+        <div class="hide gddk">
+          <div class="formdn">
+            <i class="fa-solid fa-xmark x"></i>
+            <div class="log-in">
+              <p class="giaodien">Full name</p>
+              <input
+                type="text"
+                placeholder="Nhập tên của bạn"
+                required
+                class="dangnhap fullname dangki"
+              />
+              <p class="giaodien">Tài khoản</p>
+              <input
+                type="text"
+                placeholder="Nhập tài khoản"
+                required
+                class="dangnhap log dangki"
+              />
+              <p class="giaodien">Mật khẩu</p>
+              <input
+                type="password"
+                placeholder="Nhập mật khẩu"
+                required
+                class="dangnhap pass dangki"
+              />
+              <button class="submit sdk">Đăng kí</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <header class="header">
+      <div class="thanhphan">
+        <nav class="noidung">
+          <ul class="ul">
+            <li>
+              <a href="/index.html"><i class="fa-solid fa-house"></i></a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container-random">
+      <section class="random-section">
+        <h2 class="section-title-random">Truyện Ngẫu Nhiên</h2>
+        <p>
+          Không biết đọc gì? Hãy để chúng tôi gợi ý cho bạn một truyện ngẫu
+          nhiên!
+        </p>
+        <button id="random-story-btn" class="random-btn">
+          Đề Xuất Ngẫu Nhiên
+        </button>
+
+        <div id="random-story-container"></div>
+      </section>
+      <div class="overlay" id="overlay">
+        <div class="iframe-container">
+          <div class="thongTin">
+            <div class="phanThongTin"></div>
+  
+            <hr />
+            <div class="phanChap"></div>
+          </div>
+          <div class="close-btn"><i class="fa-solid fa-xmark read"></i></div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/random/main.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </body>
+</html>

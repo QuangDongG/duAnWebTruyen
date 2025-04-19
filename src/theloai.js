@@ -17,6 +17,7 @@ let dataPage = [];
 const data = decodeURIComponent(urlParams.get("data")); // Lấy giá trị của 'data'
 const page = decodeURIComponent(urlParams.get("page"));
 const keyword = urlParams.get("keyword");
+
 console.log(page);
 console.log(data);
 
@@ -25,8 +26,13 @@ console.log(data);
 const ulImg = document.querySelector(".ulImg");
 async function theLoaiCapNhat() {
   try {
+    const title_chap = document.querySelector(".title-chap");
     let theloai;
-    if (data === "truyen-moi") {
+    if (
+      data === "truyen-moi" ||
+      data === "sap-ra-mat" ||
+      data === "hoan-thanh"
+    ) {
       theloai = await axios.get(
         "https://otruyenapi.com/v1/api/danh-sach/" + data + "?page=" + page
       );
@@ -41,7 +47,7 @@ async function theLoaiCapNhat() {
     }
 
     console.log(theloai);
-
+    title_chap.textContent = theloai.data.data.titlePage;
     const total = theloai.data.data.params.pagination.totalItems;
     dataPage = theloai.data.data.items;
     console.log(dataPage);
@@ -121,9 +127,15 @@ export function numberPage(items) {
 
       liImg.classList.add("mauTrang");
       currentPage = i + 1;
-      window.location.href = `theloai.html?data=${data}&page=${encodeURIComponent(
-        currentPage
-      )}`;
+      if (data === "tim-kiem") {
+        window.location.href = `theloai.html?data=${data}&page=${currentPage}&keyword=${encodeURIComponent(
+          keyword
+        )}`;
+      } else {
+        window.location.href = `theloai.html?data=${data}&page=${encodeURIComponent(
+          currentPage
+        )}`;
+      }
       numberPage(items);
     });
   }

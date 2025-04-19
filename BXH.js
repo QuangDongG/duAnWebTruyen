@@ -158,13 +158,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const tabs = document.querySelectorAll(".tab");
   tabs.forEach((tab, index) => {
     tab.addEventListener("click", function () {
+      const href = document.querySelector(".href-bxh");
       contentList.textContent = "";
       tabs.forEach((t) => t.classList.remove("actived"));
       this.classList.add("actived");
       if (index === 0) {
         convert = "hoan-thanh";
+        href.href = "src/theloai.html?data=hoan-thanh&page=1";
       } else {
         convert = "sap-ra-mat";
+        href.href = "src/theloai.html?data=sap-ra-mat&page=1";
       }
       ContentUpdate(convert);
     });

@@ -1,48 +1,79 @@
+import { Trangdoctruyen } from "./src/Local_main.js";
 const select = document.querySelector(".truyennew");
-function tt() {
-  for (let i = 0; i < 12; i++) {
-    let a = String(i + 1);
-    const creatdiv = document.createElement("div");
-    creatdiv.style.backgroundImage = "url(/manhwa/" + a + ".jpg)";
+const name = [
+  "Detective Conan",
+  "The Beginning After the End",
+  "Attack On Titan",
+  "Blue Lock",
+  "Demon Slayer",
+  "Thiếu Niên Bóng Chuyền",
+  "Death Note",
+  "My Hero Academia",
+  "Violet Evergarden",
+  "Naruto",
+  "Bastard",
+  "Solo Leveling",
+];
+const slug = [
+  "tham-tu-conan",
+  "",
+  "dai-chien-titan-before-the-fall",
+  "blue-lock-ngang-raw",
+  "thanh-guom-diet-quy",
+  "vua-bong-chuyen",
+  "cuon-so-tu-than-phu-chuong",
+  "truong-hoc-sieu-anh-hung",
+  "",
+  "naruto-cuu-vi-ho-ly",
+  "",
+  "solo-leveling-ragnarok",
+];
+const thumb_url = [
+  "tham-tu-conan-thumb.jpg",
+  "",
+  "dai-chien-titan-before-the-fall-thumb.jpg",
+  "blue-lock-ngang-raw-thumb.jpg",
+  "thanh-guom-diet-quy-rengoku-kyoujurou-gaiden-thumb.jpg",
+  "vua-bong-chuyen-thumb.jpg",
+  "cuon-so-tu-than-phu-chuong-thumb.jpg",
+  "truong-hoc-sieu-anh-hung-thumb.jpg",
+  "",
+  "naruto-cuu-vi-ho-ly-thumb.jpg",
+  "",
+  "solo-leveling-ragnarok-thumb.jpg",
+];
 
+async function tt() {
+  for (let i = 0; i < name.length; i++) {
+    const creatdiv = document.createElement("div");
+    creatdiv.style.backgroundImage = `url(/manhwa/${i + 1}.jpg)`;
     creatdiv.classList.add("truyenmoi");
-    const creatp = document.createElement("p");
-    creatp.classList.add("thongtin");
-    creatp.classList.add("hide");
-    if (i === 0) {
-      creatp.textContent = "Detective Conan";
-    } else if (i === 1) {
-      creatp.textContent = "The Beginning After the End";
-    } else if (i === 2) {
-      creatp.textContent = "Attack On Titan";
-    } else if (i === 3) {
-      creatp.textContent = "Blue Lock";
-    } else if (i === 4) {
-      creatp.textContent = "Demon Slayer";
-    } else if (i === 5) {
-      creatp.textContent = "Thiếu Niên Bóng Chuyền";
-    } else if (i === 6) {
-      creatp.textContent = "Death Note";
-    } else if (i === 7) {
-      creatp.textContent = "My Hero Academia";
-    } else if (i === 8) {
-      creatp.textContent = "One Punch Man";
-    } else if (i === 9) {
-      creatp.textContent = "Naruto";
-    } else if (i === 10) {
-      creatp.textContent = "Bastard";
-    } else {
-      creatp.textContent = "Solo Leveling";
-    }
-    const creata = document.createElement("a");
-    const creatp1 = document.createElement("p");
-    creatp1.textContent = "Đọc";
-    creata.classList.add("doc");
-    creata.setAttribute("href", "#");
-    creata.append(creatp1);
-    creatdiv.append(creatp, creata);
+
+    const infoText = document.createElement("p");
+    infoText.classList.add("thongtin", "hide");
+    infoText.textContent = name[i];
+
+    const readButton = document.createElement("p");
+    const readLabel = document.createElement("p");
+    readLabel.textContent = "Đọc";
+    readButton.classList.add("doc");
+    readButton.append(readLabel);
+
+    creatdiv.append(infoText, readButton);
     select.append(creatdiv);
   }
+  const item = {
+    slug: "",
+    thumb_url: "",
+  };
+  const pClick = Array.from(document.querySelectorAll(".doc"));
+  pClick.forEach((p, index) => {
+    p.addEventListener("click", () => {
+      item.slug = slug[index];
+      item.thumb_url = thumb_url[index];
+    });
+    Trangdoctruyen(item, p);
+  });
 }
 
 tt();
@@ -148,15 +179,17 @@ export function hideTL() {
   const theLoai = document.querySelector(".theLoaiover");
   const theloai2 = document.querySelector(".theloai2");
   theLoai.addEventListener("mouseover", function () {
+    theloai2.style.pointerEvents = "auto";
     theloai2.style.visibility = "visible";
     theloai2.style.opacity = "1";
     theloai2.style.transform = "translate(0)";
     theloai2.style.transition = "0.5s";
   });
   theLoai.addEventListener("mouseout", function () {
+    theloai2.style.pointerEvents = "none";
     theloai2.style.visibility = "hidden";
     theloai2.style.opacity = "0";
-    theloai2.style.transform = "translate(10vw)";
+    theloai2.style.transform = "translate(-50vw)";
   });
 }
 hideTL();

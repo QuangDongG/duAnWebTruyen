@@ -3,26 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/favicon_io (1)/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/favicon_io (1)/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/favicon_io (1)/favicon-16x16.png"
-    />
-
-    <link rel="stylesheet" href="style.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+   
     <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="css.css" />
     <link
       rel="stylesheet"
@@ -32,16 +18,60 @@
       referrerpolicy="no-referrer"
     />
 
-    <title>Truyen DL</title>
+    <title>Sunrise</title>
   </head>
-  <body>
-    <a href="#"><div class="return">
+  <body id="body">
+    <!-- decor -->
+   <div class="decor"> 
+    <div class="bg-pro-max"></div>
+  
+    <!-- Trăng  -->
+    <div class="moon"></div>
+    <div class="stars">
+      <!-- Tạo sao  -->
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  
+      </div>
+    <!-- hạt sao di chuyển  -->
+    <div class="particles"></div>
+    <!--  -->
+   
+    <a href="#body"><div class="return">
       <div><i class="fa-solid fa-arrow-up"></i></div>
     </div></a>
     <div class="head">
       <div class="logo">
-        <a href="#"><img src="/anh/Logo_TRUYEN_DL.svg" alt="" /></a>
+        <a href="#"><img src="/anh/TRUTRAGUBA.png" alt="" /></a>
       </div>
+          <!-- Tim kiem -->
+      <section id="search">
+        <div class="search">
+          <div class="csearch">
+            <input
+              type="text"
+              class="text"
+              placeholder="Search..."
+              name="text"
+              required
+            />
+            <button class="but">
+              <i id="i" class="fa-solid fa-magnifying-glass fa-fade fa-sm"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- audio -->
+       <div class="audio"><audio class="bg-music" loop>
+        <source class="mp3-audio" src="mp3/TRTD.mp3" type="audio/mpeg" />
+        Trình duyệt không hỗ trợ audio.
+      </audio>
+<div style="display: flex;"><div><div style="display: flex;"> <button class="play-music">Play</button>
+  <select class="list-music"></select></div>
+<div><input type="range" class="volume" min="0" max="1" step="0.01" value="1"/></div></div><div><img class="music-dvd" style="width:40px; height: 40px; border-radius: 50%;" src="https://png.pngtree.com/png-clipart/20230421/original/pngtree-music-icon-pink-cd-cassette-with-mic-png-image_9071063.png" alt=""></div></div></div>
+       <!--  -->
       <div class="taikhoan">
         <div class="user_khach_hang">
           <p class="name_khach_hang"><!--add name --></p>
@@ -93,21 +123,21 @@
               <p class="giaodien">Full name</p>
               <input
                 type="text"
-                placeholder="Nhap ten cua ban"
+                placeholder="Nhập tên của bạn"
                 required
                 class="dangnhap fullname dangki"
               />
               <p class="giaodien">Tài khoản</p>
               <input
                 type="text"
-                placeholder="Nhap tai khoan"
+                placeholder="Nhập tài khoản"
                 required
                 class="dangnhap log dangki"
               />
               <p class="giaodien">Mật khẩu</p>
               <input
                 type="password"
-                placeholder="nhap mat khau"
+                placeholder="Nhập mật khẩu"
                 required
                 class="dangnhap pass dangki"
               />
@@ -120,6 +150,7 @@
     <header class="header">
       <div class="thanhphan">
         <nav class="noidung">
+      
           <ul class="ul">
             <li>
               <a href="/index.html"><i class="fa-solid fa-house"></i></a>
@@ -136,37 +167,22 @@
                 <div class="theloai2"><div class="divtheloai"></div></div>
               </a>
             </li>
-            <li><a href="#">Xếp Hạng</a></li>
-            <li><a href="#" class="manhwu">MANHWA</a></li>
-            <li><a href="#" class="anime">ANIME</a></li>
+            <li><a href="/random/index.html">Random</a></li>
+            <li><a href="/src/theloai.html?data=manhwa&page=1" class="manhwu">MANHWA</a></li>
+            <li><a href="/src/theloai.html?data=anime&page=1" class="anime">ANIME</a></li>
           </ul>
         </nav>
       </div>
     </header>
-    <!-- Tim kiem -->
-    <section id="search">
-      <div class="search">
-        <div class="csearch">
-          <input
-            type="text"
-            class="text"
-            placeholder="Search..."
-            name="text"
-            required
-          />
-          <button class="but">
-            <i id="i" class="fa-solid fa-magnifying-glass fa-fade fa-sm"></i>
-          </button>
-        </div>
-      </div>
-    </section>
+
+    
     <!-- body -->
     <div class="tpbody">
       <div class="body">
         <div class="section">
           <h2 class="h2" style="position: relative; bottom: -0.8em">
             Truyện đề cử
-            <i class="fa-solid fa-arrow-right" style=""></i>
+            <i class="fa-solid fa-arrow-right" ></i>
           </h2>
           <section class="truyennew">
             <!-- add truyen vao tt -->
@@ -196,11 +212,10 @@
           <ul class="ulImg"></ul>
         </div>
         <div class="upload"><div class="containerBXH">
-          <!-- Rankings Section -->
           <div class="sectionBXH">
               <div class="section-header-bxh">
                   <div class="vertical-line"></div>
-                  <h2 class="section-title-bxh">Đọc Gì Hôm Nay?</h2>
+                  <h2 class="section-title-bxh" style=" color: #6b66a3;">Đọc Gì Hôm Nay?</h2>
               </div>
               
               <div class="tabs">
@@ -209,18 +224,17 @@
               </div>
               
               <div class="content-list" id="content-list">
-                  <!-- Content items will be loaded here with JavaScript -->
               </div>
               
               <div class="view-more">
-                  <a href="#">
-                      Xem thêm BXH
+                  <a class="href-bxh" href="src/theloai.html?data=sap-ra-mat&page=1">
+                      Xem thêm
                       <i class="fa-solid fa-arrow-right"></i>
                   </a>
               </div>
           </div>
           
-          <!-- Comments Section -->
+          <!-- add list -->
           <div class="section">
               <div class="section-header">
                   <div class="vertical-line"></div>
@@ -228,7 +242,7 @@
               </div>
               
               <div id="comments-list">
-                  <!-- Comments will be loaded here with JavaScript -->
+                 <!-- add list -->
               </div>
               
               <div class="view-more">
@@ -340,8 +354,123 @@
 </div>
 
 <div class="container"><div class="sliderFootTour"></div></div>
+<!-- footer -->
+<footer class="footer">
+  <div class="footer-decoration"></div>
+  <div class="footer-decoration"></div>
+  
+  <div class="footer-container">
+      <div class="footer-grid">
+          <div class="footer-section company-info">
+              <h3>Về chúng tôi</h3>
+              <p>Sunrise.net là nền tảng đọc truyện tranh trực tuyến hàng đầu, cung cấp kho truyện phong phú với chất lượng hình ảnh sắc nét và trải nghiệm đọc mượt mà cho người dùng.</p>
 
+              <p><strong>Địa chỉ:</strong>Trần Đại Nghĩa,Quận Hai Bà Trưng,Hà Nội</p>
+              <p><strong>Email:</strong> nhom7.net@gmail.com</p>
+              <p><strong>Hotline:</strong> 0345678912</p>
+              
+              <div class="social-icons">
+                  <a href="#" class="social-icon" aria-label="Facebook">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>
+                  </a>
+                  <a href="#" class="social-icon" aria-label="Twitter">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1DA1F2"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg>
+                  </a>
+                  <a href="#" class="social-icon" aria-label="Instagram">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#E4405F"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 1.802c-2.67 0-2.986.01-4.04.059-.976.045-1.505.207-1.858.344-.466.182-.8.398-1.15.748-.35.35-.566.684-.748 1.15-.137.353-.3.882-.344 1.857-.048 1.055-.058 1.37-.058 4.041 0 2.67.01 2.986.058 4.04.045.977.207 1.505.344 1.858.182.466.399.8.748 1.15.35.35.684.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058 2.67 0 2.987-.01 4.04-.058.977-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.684.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041 0-2.67-.01-2.986-.058-4.04-.045-.977-.207-1.505-.344-1.858a3.097 3.097 0 0 0-.748-1.15 3.098 3.098 0 0 0-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.055-.048-1.37-.058-4.041-.058zm0 3.064a5.135 5.135 0 1 1 0 10.27 5.135 5.135 0 0 1 0-10.27zm0 8.468a3.333 3.333 0 1 0 0-6.666 3.333 3.333 0 0 0 0 6.666zm6.538-8.469a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
+                  </a>
+                  <a href="#" class="social-icon" aria-label="YouTube">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#FF0000"><path d="M21.543 6.498C22 8.28 22 12 22 12s0 3.72-.457 5.502c-.254.985-.997 1.76-1.938 2.022C17.896 20 12 20 12 20s-5.893 0-7.605-.476c-.945-.266-1.687-1.04-1.938-2.022C2 15.72 2 12 2 12s0-3.72.457-5.502c.254-.985.997-1.76 1.938-2.022C6.107 4 12 4 12 4s5.896 0 7.605.476c.945.266 1.687 1.04 1.938 2.022zM10 15.5l6-3.5-6-3.5v7z"/></svg>
+                  </a>
+                  <a href="#" class="social-icon" aria-label="TikTok">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#000000"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.59-1.16-2.59-2.5 0-1.4 1.16-2.5 2.59-2.5.27 0 .54.05.79.13v-3.13c-.26-.03-.54-.05-.79-.08-3.46-.16-6.46 2.62-6.46 5.96 0 3.27 2.69 5.92 6.46 5.92 3.74 0 6.51-2.67 6.51-5.92V9.15c1.1.75 2.63 1.16 4.13 1.16v-3.1c-.8.01-2.84-.35-3.94-1.39z"/></svg>
+                  </a>
+              </div>
+          </div>
+          
+          <div class="footer-section">
+              <h3>Liên kết nhanh</h3>
+              <ul class="footer-links">
+                  <li><a href="/index.html" class="footer-link">Trang chủ</a></li>
+                  <li><a href="/trangtruyen/trangtruyen1.html?data=ve-chung-toi" target="_blank" class="footer-link">Về chúng tôi</a></li>
+                  <li><a href="#" target="_blank" class="footer-link">Sản phẩm</a></li>
+                  <li><a href="#" target="_blank" class="footer-link">Dịch vụ</a></li>
+                  <li><a href="#" target="_blank" class="footer-link">Bảng xếp hạng</a></li>
+                  <li><a href="#" target="_blank" class="footer-link">Blog</a></li>
+                  <li><a href="/trangtruyen/trangtruyen1.html?data=lien-lac-voi-chung-toi" target="_blank" class="footer-link">Liên hệ</a></li>
+                  <li><a href="#" target="_blank" class="footer-link">Trợ giúp & FAQs</a></li>
+              </ul>
+          </div>
+          
+          <div class="footer-section">
+              <h3>Tải ứng dụng</h3>
+              <p>Tải xuống ứng dụng của chúng tôi để có trải nghiệm tốt nhất trên thiết bị di động của bạn.</p>
+              
+              <div class="app-buttons">
+                  <a href="#" class="app-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.9 2.318A5.32 5.32 0 0 1 22 7.5v9c0 2.9-2.4 5.3-5.3 5.3h-9.4C4.4 21.8 2 19.4 2 16.5v-9c0-2.9 2.4-5.2 5.3-5.2h10.6zm.7 5.7-8.1 4.2c-.4.2-.9.2-1.3 0l-8-4.2c-.3-.2-.4-.6-.2-.9.1-.3.5-.5.8-.3l8 4.2c.1.1.3.1.4 0l8.1-4.2c.3-.2.7 0 .8.3.2.3.1.7-.3.9z"/></svg>
+                      <div>
+                          <span>Tải từ</span>
+                          <strong>Email</strong>
+                      </div>
+                  </a>
+                  <a href="#" class="app-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12.954 11.616 15.911 8.7a.897.897 0 0 0-.784-1.533.94.94 0 0 0-.631.248l-2.913 2.915-2.915-2.915a.94.94 0 0 0-.63-.248.897.897 0 0 0-.784 1.533l2.957 2.917-2.957 2.916a.897.897 0 0 0 .784 1.534.94.94 0 0 0 .63-.248l2.915-2.915 2.913 2.915a.94.94 0 0 0 .631.248.897.897 0 0 0 .784-1.534l-2.957-2.916zM12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"/></svg>
+                      <div>
+                          <span>Tải từ</span>
+                          <strong>App Store</strong>
+                      </div>
+                  </a>
+              </div>
+              
+              <h3 style="margin-top: 1.5rem;">Đăng ký nhận tin</h3>
+              <p>Nhận thông báo về các cập nhật và ưu đãi mới nhất.</p>
+              
+              <form class="newsletter-form">
+                  <input type="email" class="newsletter-input" placeholder="Email của bạn" required>
+                  <button type="submit" class="newsletter-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                  </button>
+              </form>
+              
+              <div class="dark-mode-toggle">
+                  <label class="toggle-switch">
+                      <input type="checkbox" class="toggle-input">
+                      <span class="toggle-slider"></span>
+                  </label>
+                  <span>Chế độ tối</span>
+              </div>
+              
+              <div class="language-selector">
+                  <select class="language-select">
+                      <option value="vi">Tiếng Việt</option>
+                      <option value="en">English</option>
+                      <option value="zh">中文</option>
+                      <option value="ja">日本語</option>
+                      <option value="ko">한국어</option>
+                  </select>
+              </div>
+          </div>
+      </div>
 
+      <nav class="footer-nav">
+          <a href="/trangtruyen/trangtruyen1.html?data=ve-chung-toi" target="_blank" class="footer-link">Về chúng tôi</a>
+          <a href="/trangtruyen/trangtruyen1.html?data=lien-lac-voi-chung-toi" target="_blank" class="footer-link">Liên lạc với chúng tôi</a>
+          <a href="#" target="_blank" class="footer-link">Tải về</a>
+          <a href="/trangtruyen/trangtruyen1.html?data=chinh-sach-cookie" target="_blank" class="footer-link">Chính sách Cookie</a>
+          <a href="/trangtruyen/trangtruyen1.html?data=chinh-sach-quyen-rieng-tu" target="_blank" class="footer-link">Chính sách Quyền riêng tư</a>
+          <a href="/trangtruyen/trangtruyen1.html?data=chinh-sach-ban-quyen" target="_blank" class="footer-link">Chính sách bản quyền</a>
+          <a href="/trangtruyen/trangtruyen1.html?data=thoa-thuan" target="_blank" class="footer-link">Thỏa thuận</a>
+          <a href="/trangtruyen/trangtruyen1.html?data=bxh-cam-on" target="_blank" class="footer-link">BXH cảm ơn</a>
+      </nav>
+
+      <div class="footer-bottom">
+          <p>Copyright © 2018-2025 Huya PTE. LTD. All Rights Reserved</p>
+          <p>Được cấp phép bởi Sở Thông tin và Truyền thông</p>
+      </div>
+  </div>
+  </footer>
+ <!--  -->
     <script src="/main.js"></script>
     <script src="/tt.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -349,5 +478,23 @@
     <script src="/BXH.js" type="module"></script>
     <!-- <script src="/heart.js"></script> -->
     <!-- <script src="/login.js"></script> -->
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        let count = localStorage.getItem("count") || 0;
+        count = parseInt(count);
+    
+        if (count <= 0) {
+          count++;
+          localStorage.setItem("count", count);
+          setTimeout(() => {
+            window.location.href = "/trangtruyen/trangtruyen1.html?data=the-loai";
+          },1000);
+        } else {
+          console.log("Error");
+        }
+      });
+    </script>
+    
+    
   </body>
 </html>

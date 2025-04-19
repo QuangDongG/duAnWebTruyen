@@ -1,0 +1,14 @@
+Thuộc tính | Ý nghĩa
+currentTime | Thời điểm hiện tại (tính bằng giây)
+duration | Tổng thời lượng video
+paused | Trả về true nếu video đang tạm dừng
+ended | Trả về true nếu video đã hết
+volume | Âm lượng (0.0 đến 1.0)
+muted | true nếu đang tắt tiếng
+playbackRate | Tốc độ phát (1 là bình thường, 2 là gấp đôi, v.v.)
+readyState | Trạng thái sẵn sàng của video (0–4)
+seeking | true nếu đang tua
+loop | true nếu phát lặp lại
+autoplay | true nếu video tự phát khi tải xong
+src | Đường dẫn đến video
+videoWidth / videoHeight | Kích thước gốc của video

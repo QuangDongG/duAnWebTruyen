@@ -40,8 +40,7 @@ right: 20px;
 
 
 .logo a img {
-  width: 14vw;
-  height: 6vw;
+width: 14vw;
   min-height: 50px;
   min-width: 150px;
 }
@@ -53,9 +52,15 @@ right: 20px;
 
 .ul {
   display: flex;
-
+width: 80%;
   justify-content: center;
   gap: 6px;
+  margin: 0 auto;
+}
+.ul li{
+  flex: 1;
+ display: flex;
+ justify-content: center;
 }
 
 .tpbody {
@@ -73,6 +78,7 @@ right: 20px;
   display: flex;
 }
 .text {
+  position: relative;
   text-align: center;
   width: 3vw;
   height: 3vw;
@@ -88,8 +94,8 @@ right: 20px;
   display: flex;
   justify-content: center;
   position: relative;
-  height: 2vw;
   margin-top: 2vw;
+  margin-bottom: 2vw;
 }
 .but {
   font-size: 1.5vw;
@@ -97,18 +103,21 @@ right: 20px;
   width: 3.8vw;
   height: 3.8vw;
   border-radius: 50px;
-  background-color: rgb(0, 0, 0);
-  color: white;
+  background-color: rgb(255, 210, 218);
+  color: rgb(255, 1, 90);
   display: flex;
   justify-content: center;
   align-items: center;
-  top: -0.5vw;
-  left: -0.5vw;
   position: absolute;
+  top: -0.5vw;
   transition: 0.8s;
+  left: 0;
+  border: none;
+ box-shadow: 0 0 12px rgba(255, 26, 64, 0.537),inset 10px 20px 12px rgba(255, 157, 174, 0.318);
+  
 }
 .text.fix {
-  width: 45vw;
+  width: 40vw;
   border-radius: 50px;
   padding-left: 4vw;
 }
@@ -126,12 +135,14 @@ right: 20px;
 /* truyen de cu */
 
 .truyenmoi {
-  width: 20%;
-  height: 35em;
+  height: 30rem;
   background-size: cover;
   background-position: center;
   position: relative;
+  border-radius: 50px;
+
 }
+
 
 .fullmh {
   flex: 1;
@@ -143,18 +154,19 @@ right: 20px;
   position: relative;
   top: 60%;
   color: white;
+  border-radius:  0 0 50px 50px;
 }
 .doc {
-  text-decoration: none;
+cursor: pointer;
   color: white;
   height: 3vw;
   min-width: 80px;
   min-height: 30px;
   border-radius: 30px;
-  background-color: red;
+  background-color: rgb(255, 0, 0);
   position: absolute;
-  right: 3px;
-  bottom: 5px;
+  right: 30px;
+  bottom: 30px;
   width: 8vw;
   font-size: 1em;
   display: flex;
@@ -167,25 +179,28 @@ right: 20px;
 }
 .arow .fa-solid {
   text-align: center;
-  font-size: 4.8vw;
-  width: 5vw;
-  height: 5vw;
-  background-color: rgba(245, 245, 220, 0.433);
-  border-radius: 50%;
+  font-size: 3em;
+  width: 1em;
+  height: 1em;
+  background-color: rgba(235, 235, 233, 0.433);
+  border-radius: 10px;
   position: absolute;
-  top: 40%;
+  top: 50%;
   cursor: pointer;
 }
 .arow {
   opacity: 0;
 }
 .right {
-  right: 0;
+  right: 25px;
 }
-
+.left{
+  left: 25px;
+}
 .x {
   position: absolute;
-  right: 0;
+  top: 10px;
+  right: 10px;
   width: 20px;
   height: 20px;
   border-radius: 50px;
@@ -211,7 +226,7 @@ right: 20px;
 
 
 .canchinh {
- 
+
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 0.8rem;
@@ -261,7 +276,7 @@ align-items: center;
   cursor: pointer;
   color: rgb(0, 0, 0);
   padding: 0.2em;
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0);
   border-radius: 10px;
   text-align: center;
   font-size: 0.8em;
@@ -291,10 +306,11 @@ align-items: center;
   width: 80%;
   padding: 20px;
   border-radius: 10px;
-  background-color: #6b66a3;
+  background-color: #ffeff8;
   max-width: 1000px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 0 120px rgba(0, 0, 0, 0.1);
 }
 
 .imgChiTiet {
@@ -313,11 +329,12 @@ align-items: center;
   flex: 4;
   overflow: auto;
   height: 80vh;
+
 }
 .ulChiTiet {
   margin-left: 10px;
   word-break: break-all;
-  color: aliceblue;
+  color: rgb(2, 2, 2);
   position: relative;
 }
 
@@ -325,11 +342,23 @@ align-items: center;
   height: 20px;
   display: flex;
   cursor: pointer;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  background-color: palegoldenrod;
+  margin: 5px auto;
+
 }
 .divChap:hover {
   color: azure;
-  background-color: rgba(13, 20, 20, 0.564);
+  background-color: rgb(255, 181, 10);
 }
+/* hightlight */
+.active-chap {
+  background-color: #ff9e9e;
+  font-weight: bold;
+  border-radius: 5px;
+}
+/*  */
 .pageTrang {
   width: 100%;
   height: 100%;
@@ -360,13 +389,22 @@ align-items: center;
   width: 50vw;
   height: auto;
 }
-.divChap {
-  color: aliceblue;
-  padding-bottom: 10px;
-  border-radius: 5px;
-  background-color: rgba(240, 248, 255, 0.132);
-  margin: 5px auto;
+.choice-chap{
+  position: fixed;
+ display: flex;
+ left: 50%;
+  bottom: 5%;
+  transform: translateX(-50%);
+  width: 20em;
+  height: 2em;
+  border-radius: 20px;
+  border: none;
+  background-color: #1e181822;
+  font-weight: bold;
+
+  cursor: pointer;
 }
+
 hr {
   margin-right: 4px;
 }
@@ -404,7 +442,7 @@ hr {
   z-index: 100;
   padding: 1rem;
   visibility: hidden;
-  transform: translate(10vw);
+  transform: translate(-50vw);
 }
 .theLoai {
   position: relative;
@@ -560,11 +598,21 @@ hr {
 }
 /*  */
 @media screen and (max-width: 576px) {
-
+  
+.head{
+  display: flex;
+}
   .taikhoan {
     margin-top: var(--spacing-xs);
-    width: 100%;
     justify-content: flex-end;
+    order: 1;
+  }
+  .logo{
+    order: 0;
+  }
+  .audio{
+    order: 2;
+    width: 100%;
   }
   .upload {
     display: none;
@@ -625,12 +673,15 @@ margin-top: 20px;
   }
 
   .ul {
-  
-   
     flex-wrap: wrap;
-   
+    width: 100%;
   }
-
+  .ul li{
+    flex: none;
+  }
+.noidung .ul{
+ gap: 0.5rem 1rem;
+}
   .ul li a {
     position: relative;
     font-size: 0.8rem !important;

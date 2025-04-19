@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Parabol đơn giản</title>
+    <style>
+      body {
+        height: 100vh;
+        margin: 0;
+        background: #f0f0f0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ball {
+        width: 30px;
+        height: 30px;
+        background: red;
+        border-radius: 50%;
+        position: absolute;
+        top: 500px;
+        left: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ball"></div>
+
+    <script>
+      const ball = document.querySelector(".ball");
+
+      let t = 0;
+      const g = 0.2; // Gia tốc trọng lực
+      const vx = 2; // Vận tốc theo X
+      const vy = -8; // Vận tốc ban đầu theo Y
+
+      const startX = 100;
+      const startY = 500;
+
+      function move() {
+        const x = startX + vx * t;
+        const y = startY + vy * t + 0.5 * g * t * t;
+
+        ball.style.left = `${x}px`;
+        ball.style.top = `${y}px`;
+
+        t += 1;
+
+        // Dừng khi bóng rơi xuống lại gần vị trí bắt đầu
+        if (y < window.innerHeight) {
+          requestAnimationFrame(move);
+        } else {
+          t = 0; // reset nếu muốn lặp lại
+          // requestAnimationFrame(move); // mở dòng này nếu muốn nó lặp lại mãi
+          requestAnimationFrame(move);
+        }
+      }
+
+      move();
+    </script>
+  </body>
+</html>

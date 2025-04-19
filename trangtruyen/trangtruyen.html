@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="stylesheet" href="styles.css" />
+
+    <title>Các tình yêu đọc truyện vui vẻ</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <a href="/index.html" class="back-btn"
+          ><i class="fa-solid fa-house"></i
+        ></a>
+
+        <div class="chapter-nav">
+          <button id="prevChapter" disabled>Chương trước</button>
+          <select id="chapterSelect" class="chapter-select"></select>
+          <button id="nextChapter" disabled>Chương sau</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="reader-container">
+        <h1 id="comicTitle"></h1>
+        <h2 id="chapterTitle"></h2>
+        <div id="chapterContent" class="chapter-content"></div>
+      </div>
+    </main>
+    <script>
+      let lastScrollTop = 0;
+      const header = document.querySelector(".header");
+
+      window.addEventListener("scroll", () => {
+        const currentScroll =
+          window.pageYOffset || document.documentElement.scrollTop;
+
+        if (currentScroll > lastScrollTop) {
+          header.style.visibility = "hidden";
+        } else {
+          header.style.visibility = "visible";
+        }
+
+        lastScrollTop = currentScroll;
+      });
+      window.addEventListener("click", function () {
+        header.style.visibility = "visible";
+      });
+      document.addEventListener("DOMContentLoaded", async function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get("slug");
+        const chapterName = urlParams.get("chapter");
+        const chapterIndex = parseInt(urlParams.get("index"));
+
+        if (!slug) {
+          alert("Thông tin truyện không hợp lệ");
+          window.location.href = "/index.html";
+          return;
+        }
+
+        try {
+          // comic information
+          const comicResponse = await axios.get(
+            `https://otruyenapi.com/v1/api/truyen-tranh/${slug}`
+          );
+          const comicData = comicResponse.data.data;
+
+          // title
+          document.getElementById("comicTitle").textContent =
+            comicData.seoOnPage.seoSchema.name;
+
+          //Get chapters
+          const chapters = comicData.item.chapters[0].server_data;
+
+          const chapterSelect = document.getElementById("chapterSelect");
+          chapters.forEach((chapter, index) => {
+            const option = document.createElement("option");
+            option.value = index;
+            option.textContent = `Chap ${chapter.chapter_name}`;
+            if (chapter.chapter_name === chapterName) {
+              option.selected = true;
+            }
+            chapterSelect.appendChild(option);
+          });
+
+          //prev and next
+          const prevBtn = document.getElementById("prevChapter");
+          const nextBtn = document.getElementById("nextChapter");
+
+          if (chapterIndex > 0) {
+            prevBtn.disabled = false;
+          }
+
+          if (chapterIndex < chapters.length - 1) {
+            nextBtn.disabled = false;
+          }
+
+          await loadChapter(chapters[chapterIndex]);
+
+          // Chapter select change event
+          chapterSelect.addEventListener("change", function () {
+            const selectedIndex = parseInt(this.value);
+            const selectedChapter = chapters[selectedIndex];
+            window.location.href = `/trangtruyen/trangtruyen.html?slug=${slug}&chapter=${selectedChapter.chapter_name}&index=${selectedIndex}`;
+          });
+
+          prevBtn.addEventListener("click", function () {
+            if (chapterIndex > 0) {
+              const prevIndex = chapterIndex - 1;
+              const prevChapter = chapters[prevIndex];
+              window.location.href = `/trangtruyen/trangtruyen.html?slug=${slug}&chapter=${prevChapter.chapter_name}&index=${prevIndex}`;
+            }
+          });
+
+          nextBtn.addEventListener("click", function () {
+            if (chapterIndex < chapters.length - 1) {
+              const nextIndex = chapterIndex + 1;
+              const nextChapter = chapters[nextIndex];
+              window.location.href = `/trangtruyen/trangtruyen.html?slug=${slug}&chapter=${nextChapter.chapter_name}&index=${nextIndex}`;
+            }
+          });
+        } catch (error) {
+          console.error("Error loading comic:", error);
+          alert("Có lỗi xảy ra khi tải truyện");
+        }
+
+        async function loadChapter(chapter) {
+          try {
+            document.getElementById(
+              "chapterTitle"
+            ).textContent = `Chapter ${chapter.chapter_name}`;
+            const contentDiv = document.getElementById("chapterContent");
+            contentDiv.innerHTML = "<p>Đang tải...</p>";
+
+            const response = await axios.get(chapter.chapter_api_data);
+            const chapterData = response.data.data;
+
+            contentDiv.innerHTML = "";
+
+            chapterData.item.chapter_image.forEach((img) => {
+              const imgElement = document.createElement("img");
+              imgElement.src =
+                chapterData.domain_cdn +
+                "/" +
+                chapterData.item.chapter_path +
+                "/" +
+                img.image_file;
+              imgElement.alt = `Page ${img.page}`;
+              imgElement.loading = "lazy";
+              contentDiv.appendChild(imgElement);
+            });
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+          } catch (error) {
+            console.error("Error loading chapter:", error);
+            document.getElementById("chapterContent").innerHTML =
+              "<p>Có lỗi xảy ra khi tải chapter. Vui lòng thử lại sau.</p>";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
