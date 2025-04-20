@@ -228,14 +228,24 @@ cursor: pointer;
 .canchinh {
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(4,1fr);
   gap: 0.8rem;
   justify-content: center;
+}
+@media screen and (max-width:576px){
+  .danhsachchinh{
+    width: 100%;
+  }
+  .danhsach{
+    padding: 0;
+  }
+  .canchinh{
+    grid-template-columns: repeat(2,1fr);
+  }
 }
 .img {
   padding: 1em 1em 0em;
   width: 100%;
-  min-width: 140px;
   height: 16vw;
   min-height: 200px;
   object-fit: cover;
@@ -531,14 +541,14 @@ hr {
   border-radius: 8px;
   font-size: 1vw;
 }
-.lichsu {
+.lichsu,.theo_doi {
   position: relative;
 }
 .lichsuul,
-.lichsuul2 {
+.lichsuul2,.theo_doi_ul {
   width: 40vw;
   height: 40vw;
-  background-color: white;
+  background-color: #ffdfdf;
   position: absolute;
   overflow: auto;
   visibility: hidden;
@@ -547,13 +557,37 @@ hr {
   border-radius: 8px;
   top: 100%;
   left: 0;
+  z-index: 2;
+}
+.lichsuli{
+  position: relative;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  margin-bottom:3px ;
+  
+}
+.divadd{
+  background-color: #fdeaea;
+  margin-bottom:3px;
+  border-radius: 20px;
+  border: solid 2px black;
+}
+.divadd p{
+  margin-left: 1.5vw;
 }
 .lichsuimg {
+
   width: 10vw;
   height: 10vw;
 }
 .lichsup {
   font-size: 1vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 10vw;
+  text-align: center;
 }
 .logout {
   width: 5vw;
@@ -591,10 +625,10 @@ hr {
   left: 0;
   top: 23vw;
 }
-
-#canvas {
-  width: 100%;
-  height: 100%;
+.divtheodoi{
+  position: absolute;
+  left: 4vw;
+  top: 23vw;
 }
 /*  */
 @media screen and (max-width: 576px) {
@@ -682,7 +716,7 @@ margin-top: 20px;
 .noidung .ul{
  gap: 0.5rem 1rem;
 }
-  .ul li a {
+  .ul li a,.ul li .p {
     position: relative;
     font-size: 0.8rem !important;
   
@@ -744,7 +778,6 @@ margin-top: 20px;
   }
   .lichsuul,
 .lichsuul2{
-  width: 300px;
-  left: -200px;
+  left: -100px;
 }
 }

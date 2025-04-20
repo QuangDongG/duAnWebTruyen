@@ -108,15 +108,25 @@ MP3();
 function DarkMode() {
   const change_backGround = document.querySelector(".bg-pro-max");
   const check_input = document.querySelector(".toggle-input");
+  const head = document.querySelector(".head");
   const isDarkMode = localStorage.getItem("darkMode") === "true";
+
   check_input.checked = isDarkMode;
   change_backGround.style.background = isDarkMode ? "#121212" : "white";
+  if (isDarkMode) {
+    head.classList.add("dark-mode");
+  } else {
+    head.classList.remove("dark-mode");
+  }
+
   check_input.addEventListener("change", function () {
     if (check_input.checked) {
       change_backGround.style.background = "#121212";
+      head.classList.add("dark-mode");
       localStorage.setItem("darkMode", "true");
     } else {
       change_backGround.style.background = "white";
+      head.classList.remove("dark-mode");
       localStorage.setItem("darkMode", "false");
     }
   });

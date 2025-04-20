@@ -123,6 +123,7 @@ submitdn.addEventListener("click", function (e) {
     ) {
       luu_bien = duyet;
       bool = true;
+      let theo_doi;
       let lichSuTranga;
       let love;
       if (duyet.thongTinUser[0] === undefined) {
@@ -130,12 +131,18 @@ submitdn.addEventListener("click", function (e) {
       } else {
         lichSuTranga = duyet.thongTinUser[0];
       }
+      if (duyet.thongTinUser[2] === undefined) {
+        theo_doi = [];
+      } else {
+        theo_doi = duyet.thongTinUser[2];
+      }
       if (duyet.thongTinUser[1] === undefined) {
         love = [];
       } else {
         love = duyet.thongTinUser[1];
       }
       localStorage.setItem("love", JSON.stringify(love));
+      localStorage.setItem("theoDoi", JSON.stringify(theo_doi));
       localStorage.setItem("lichSuTrang", JSON.stringify(lichSuTranga));
       localStorage.setItem("nguoiDunga", JSON.stringify(luu_bien));
       localStorage.setItem("dungSai", JSON.stringify(bool));
@@ -275,7 +282,15 @@ export function phanTrang(page) {
     //
     pCreat.addEventListener("click", function () {
       localStorage.setItem("userdn", JSON.stringify(luu_bien));
-      LichSu(item, bool, luu_bien);
+      LichSu(item, bool, luu_bien, "lichSuTrang", 0);
+      //
+      const isFollowing =
+        localStorage.getItem("isFollowing_" + item.slug) || false;
+      console.log(isFollowing);
+      const xoay = document.querySelector(".xoay");
+      if (isFollowing === "true") {
+        xoay.style.color = "yellow";
+      }
     });
 
     HienThiThongTin(item, creatImg);
@@ -415,7 +430,22 @@ export function Trangdoctruyen(item, pCreat) {
         nameStory.append(divTTP);
 
         Tim(item, ulChiTiet);
+        //theo doi
+        const divtheodoi = document.createElement("div");
+        divtheodoi.classList.add("divtheodoi");
 
+        const theodoi = document.createElement("i");
+        theodoi.classList.add("fa-solid", "fa-bookmark", "xoay");
+        divtheodoi.append(theodoi);
+        ulChiTiet.append(divtheodoi);
+        divtheodoi.addEventListener("click", function () {
+          console.log(item.slug);
+
+          theodoi.style.color = "yellow";
+          localStorage.setItem("isFollowing_" + item.slug, true);
+          localStorage.setItem("userdn", JSON.stringify(luu_bien));
+          LichSu(item, bool, luu_bien, "theoDoi", 2);
+        });
         //phan chap
         phanChap.textContent = "";
         ulChapter.classList.add("ulChapter");
@@ -593,7 +623,7 @@ export function HienThiThongTin(item, creatImg) {
   });
 }
 ///
-export function LichSu(item, bool, luu_bien) {
+export function LichSu(item, bool, luu_bien, menu, number) {
   let lichsu = [],
     yeuthich = [],
     theodoi = [],
@@ -601,19 +631,16 @@ export function LichSu(item, bool, luu_bien) {
   yeuthich = b;
   luu_bien.thongTinUser = [lichsu, yeuthich, theodoi, thich];
   let luuTru = JSON.parse(localStorage.getItem("user")) || [];
-  let luu = JSON.parse(localStorage.getItem("lichSuTrang")) || [];
+  let luu = JSON.parse(localStorage.getItem(menu)) || [];
   console.log(luu);
 
-  luu_bien.thongTinUser[0] = [...luu];
+  luu_bien.thongTinUser[number] = [...luu];
   if (bool) {
-    const exists = luu_bien.thongTinUser[0].includes(item.slug);
+    const exists = luu_bien.thongTinUser[number].includes(item.slug);
 
     if (!exists) {
-      luu_bien.thongTinUser[0].unshift(item.slug);
-      localStorage.setItem(
-        "lichSuTrang",
-        JSON.stringify(luu_bien.thongTinUser[0])
-      );
+      luu_bien.thongTinUser[number].unshift(item.slug);
+      localStorage.setItem(menu, JSON.stringify(luu_bien.thongTinUser[number]));
     }
   }
   console.log(luu_bien);
@@ -627,23 +654,36 @@ export function LichSu(item, bool, luu_bien) {
   console.log(a);
   localStorage.setItem("user", JSON.stringify(luuTru));
 }
+const theo_doi_ul = document.querySelector(".theo_doi_ul");
+const theo_doi_a = document.querySelector(".theo_doi_a");
 const lichsuul = document.querySelector(".lichsuul");
 const lichsua = document.querySelector(".lichsua");
-export function addTruyen(lichsua, lichsuul) {
+const lichsu = document.querySelector(".lichsu");
+const theo_doi = document.querySelector(".theo_doi");
+export function addTruyen(lichsua, lichsuul, menu, number, lichsu) {
   // Kiểm tra phần tử tồn tại trước khi thêm sự kiện
   if (lichsua && lichsuul) {
     lichsua.addEventListener("mouseover", function () {
-      let luu = JSON.parse(localStorage.getItem("lichSuTrang")) || [];
-      luu_bien.thongTinUser[0] = luu;
-      console.log(luu_bien.thongTinUser[0]);
+      let luu = JSON.parse(localStorage.getItem(menu)) || [];
+      luu_bien.thongTinUser[number] = luu;
+      console.log(luu_bien.thongTinUser[number]);
     });
     lichsua.addEventListener("click", async function () {
+      if (number === 0) {
+        lichsuul.innerHTML = `<div class="divadd"><p style="font-weight: bold;">Lịch Sử</p><br></div>`;
+      } else if (number === 2) {
+        lichsuul.innerHTML = `<div class="divadd"><p style="font-weight: bold;">Đang Theo Dõi</p><br></div>`;
+      }
+
       lichsuul.style.visibility = "visible";
-      await ClickLichSu(luu_bien.thongTinUser[0]); // Đảm bảo đợi cho async function chạy xong
+      lichsuul.style.opacity = "1";
+      lichsuul.style.transition = "1s";
+      await ClickLichSu(luu_bien.thongTinUser[number]); // Đảm bảo đợi cho async function chạy xong
     });
 
-    lichsuul.addEventListener("mouseleave", function () {
+    lichsu.addEventListener("mouseleave", function () {
       lichsuul.style.visibility = "hidden";
+      lichsuul.style.opacity = "0";
       lichsuul.textContent = "";
     });
   } else {
@@ -655,6 +695,7 @@ export function addTruyen(lichsua, lichsuul) {
       let imgls = await axios.get(
         "https://otruyenapi.com/v1/api/truyen-tranh/" + e
       );
+      let item = imgls.data.data.item;
       const lichsuli = document.createElement("li");
       lichsuli.classList.add("lichsuli");
       const lichsup = document.createElement("p");
@@ -662,10 +703,10 @@ export function addTruyen(lichsua, lichsuul) {
       const lichsuimg = document.createElement("img");
       lichsuimg.classList.add("lichsuimg");
       lichsuimg.src = imgls.data.data.seoOnPage.seoSchema.image;
-      lichsup.textContent = "Đọc Truyện";
+      lichsup.textContent = item.name;
       lichsuli.append(lichsuimg, lichsup);
       lichsuul.append(lichsuli);
-      let item = imgls.data.data.item;
+
       Trangdoctruyen(item, lichsup);
     });
   }
@@ -763,7 +804,8 @@ function Tim(item, ulChiTiet) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  addTruyen(lichsua, lichsuul);
+  addTruyen(lichsua, lichsuul, "lichSuTrang", 0, lichsu);
+  addTruyen(theo_doi_a, theo_doi_ul, "theoDoi", 2, theo_doi);
 });
 //body
 
@@ -1102,7 +1144,6 @@ function chucNang() {
 }
 
 //
-
 TimKiem(string);
 TheLoai(string, divtheloai);
 fetchData();

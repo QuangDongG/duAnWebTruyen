@@ -1,15 +1,19 @@
 async function ChoiceTL() {
   try {
+    document.querySelector(
+      ".title"
+    ).innerHTML = ` <h1>Chon chu de yeu thich cua ban di nao😊</h1>`;
     let list = [];
     const response = await axios.get("https://otruyenapi.com/v1/api/the-loai");
     response.data.data.items.forEach((items) => {
       const bttheloai = document.createElement("button");
+
       const ptheloai = document.createElement("p");
       bttheloai.classList.add("atheloai");
       ptheloai.classList.add("ptheloai");
       ptheloai.textContent = items.name;
       bttheloai.append(ptheloai);
-      document.body.append(bttheloai);
+      document.querySelector(".grid").append(bttheloai);
       bttheloai.addEventListener("click", function () {
         bttheloai.classList.toggle("bttheloai");
         if (bttheloai.classList.contains("bttheloai")) {
@@ -22,8 +26,9 @@ async function ChoiceTL() {
     });
     const br = document.createElement("br");
     const submit = document.createElement("button");
+    submit.classList.add("submit");
     submit.textContent = "Xác nhận";
-    document.body.append(br, submit);
+    document.querySelector(".xac-nhan").append(br, submit);
     submit.addEventListener("click", function () {
       localStorage.setItem("dulieu", JSON.stringify(list));
       window.location.replace("/index.html");
