@@ -475,7 +475,7 @@ export function Trangdoctruyen(item, pCreat) {
         divChap.classList.add("divChap");
         divChap.append("Chap:", chapter.chapter_name);
 
-        ulChapter.append(divChap);
+        ulChapter.append(option_chap, divChap);
 
         divChap.addEventListener("click", function () {
           const chapterUrl = `/trangtruyen/trangtruyen.html?slug=${encodeURIComponent(
