@@ -475,7 +475,7 @@ export function Trangdoctruyen(item, pCreat) {
         divChap.classList.add("divChap");
         divChap.append("Chap:", chapter.chapter_name);
 
-        ulChapter.append(option_chap, divChap);
+        ulChapter.append(choice_chap, divChap);
 
         divChap.addEventListener("click", function () {
           const chapterUrl = `/trangtruyen/trangtruyen.html?slug=${encodeURIComponent(
@@ -499,7 +499,7 @@ export function Trangdoctruyen(item, pCreat) {
       });
 
       img_info.append(imgChiTiet, nameStory);
-      phanChap.append(choice_chap, ulChapter);
+      phanChap.append(ulChapter);
     } catch (error) {
       console.error("Có lỗi xảy ra:", error);
     }
