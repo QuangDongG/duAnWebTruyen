@@ -294,7 +294,6 @@ export function phanTrang(page) {
     });
 
     HienThiThongTin(item, creatImg);
-
     Trangdoctruyen(item, pCreat);
   });
 }
@@ -355,149 +354,162 @@ export function numberPage(items) {
   }
 }
 export function Trangdoctruyen(item, pCreat) {
-  const closed = document.querySelector(".close");
+  const content_nameStory = document.querySelector(".content-nameStory");
   const chitiet = document.querySelector(".thongTin");
   const phanChiTiet = document.querySelector(".phanThongTin");
-  const imgChiTiet = document.createElement("img");
-  imgChiTiet.classList.add("imgChiTiet");
   const overlay = document.querySelector(".overlay");
   const close = document.querySelector(".close-btn");
-
+  const img_info = document.querySelector(".img-info");
   const phanChap = document.querySelector(".phanChap"); //phan chap
-  console.log(item); //
-  //trang truyen
+  const imgChiTiet = document.createElement("img");
+  imgChiTiet.classList.add("imgChiTiet");
+
   const thongTinTrang = document.querySelector(".thongTinTrang");
   const imgTrang = document.createElement("div");
   imgTrang.classList.add("imgTrang");
-  pCreat.addEventListener("click", async function () {
-    const ulChapter = document.createElement("ul");
 
+  pCreat.addEventListener("click", async function () {
+    // Xoá nội dung cũ trước khi hiển thị nội dung mới
     overlay.style.display = "flex";
     phanChiTiet.textContent = "";
-    const ulChiTiet = document.createElement("ul");
-    ulChiTiet.classList.add("ulChiTiet");
-    const chapterli = document.createElement("li");
-    chapterli.classList.add("chapterli");
+    phanChap.textContent = "";
+    img_info.textContent = "";
+    content_nameStory.textContent = "";
     const nameStory = document.createElement("li");
     nameStory.classList.add("nameStory");
+    const ulChapter = document.createElement("ul");
+    ulChapter.classList.add("ulChapter");
 
-    const slug = await axios
-      .get("https://otruyenapi.com/v1/api/truyen-tranh/" + item.slug)
-      .then(function (response) {
-        imgChiTiet.src =
-          "https://img.otruyenapi.com/uploads/comics/" + item.thumb_url;
-        console.log(response.data.data);
+    try {
+      const response = await axios.get(
+        "https://otruyenapi.com/v1/api/truyen-tranh/" + item.slug
+      );
 
-        let divTTP = document.createElement("div");
-        divTTP.classList.add("divTTP");
+      imgChiTiet.src =
+        "https://img.otruyenapi.com/uploads/comics/" + item.thumb_url;
 
-        let tt = response.data.data.seoOnPage.seoSchema;
-        let tl = response.data.data.item.category;
-        tl.forEach((tl) => {
-          const pTT = document.createElement("p");
-          pTT.classList.add("pTT");
-          pTT.textContent = tl.name;
-          divTTP.append(pTT);
-        });
-        let chap;
-        if (response.data.data.item.chapters.length > 0) {
-          chap =
-            response.data.data.item.chapters[0].server_data[
-              response.data.data.item.chapters[0].server_data.length - 1
-            ].chapter_name;
-        } else {
-          chap = "";
-        }
-        let str = response.data.data.item.updatedAt.slice(0, 10);
-        const dataItems = [
-          "Tên truyện:" + tt.name,
-          "Chapter:" + chap,
-          "Tác giả:" + tt.director,
-          "Giới thiệu:" +
-            response.data.data.item.content.slice(
-              3,
-              response.data.data.item.content.length - 4
-            ),
-          "Uppdate:" + str,
-        ];
+      const data = response.data.data;
+      const tt = data.seoOnPage.seoSchema;
+      const tl = data.item.category;
+      const chapters = data.item.chapters[0].server_data;
 
-        dataItems.forEach((itemData) => {
-          let liTT = document.createElement("li");
-          liTT.classList.add("liTTa");
-          liTT.textContent = itemData; // Gán textContent vào li
-          nameStory.append(liTT); // Thêm li vào ul
-        });
-        nameStory.append(divTTP);
+      const divTTP = document.createElement("div");
+      divTTP.classList.add("divTTP");
 
-        Tim(item, ulChiTiet);
-        //theo doi
-        const divtheodoi = document.createElement("div");
-        divtheodoi.classList.add("divtheodoi");
-
-        const theodoi = document.createElement("i");
-        theodoi.classList.add("fa-solid", "fa-bookmark", "xoay");
-        divtheodoi.append(theodoi);
-        ulChiTiet.append(divtheodoi);
-        divtheodoi.addEventListener("click", function () {
-          console.log(item.slug);
-
-          theodoi.style.color = "yellow";
-          localStorage.setItem("isFollowing_" + item.slug, true);
-          localStorage.setItem("userdn", JSON.stringify(luu_bien));
-          LichSu(item, bool, luu_bien, "theoDoi", 2);
-        });
-        //phan chap
-        phanChap.textContent = "";
-        ulChapter.classList.add("ulChapter");
-        //chap_choice
-        const choice_chap = document.createElement("select");
-        choice_chap.classList.add("choice-chap");
-        //hightlight
-        const chapters = response.data.data.item.chapters[0].server_data;
-        const divChapList = [];
-        const optionChapList = [];
-        chapters.forEach(async (chapter, index) => {
-          const option_chap = document.createElement("option");
-          option_chap.classList.add("option-chap");
-          option_chap.textContent = "Chap:" + chapter.chapter_name;
-          choice_chap.append(option_chap);
-          optionChapList.push(option_chap);
-          //
-          const divChap = document.createElement("div");
-          divChap.classList.add("divChap");
-          divChapList.push(divChap);
-          const nameChap = document.createElement("li");
-          nameChap.classList.add("nameChap");
-          nameChap.textContent = chapter.chapter_name;
-          divChap.append("Chap:", nameChap);
-
-          ulChapter.append(divChap);
-          //click-chap
-          divChap.addEventListener("click", function () {
-            const chapterUrl = `/trangtruyen/trangtruyen.html?slug=${item.slug}&chapter=${chapter.chapter_name}&index=${index}`;
-            window.open(chapterUrl, "_blank");
-          });
-          //choi-chap
-          choice_chap.addEventListener("change", function () {
-            const selectedIndex = choice_chap.selectedIndex;
-            const selectedChapter = chapters[selectedIndex];
-            const chapterUrl = `/trangtruyen/trangtruyen.html?slug=${item.slug}&chapter=${selectedChapter.chapter_name}&index=${selectedIndex}`;
-            window.location.href = chapterUrl;
-          });
-        });
-      })
-      .catch((error) => {
-        console.error("Có lỗi xảy ra:", error);
+      tl.forEach((tl) => {
+        const pTT = document.createElement("p");
+        pTT.classList.add("pTT");
+        pTT.textContent = tl.name;
+        divTTP.append(pTT);
       });
-    ulChiTiet.append(nameStory);
-    phanChiTiet.append(imgChiTiet);
-    phanChiTiet.append(ulChiTiet);
-    phanChap.append(ulChapter);
+
+      let chap =
+        chapters.length > 0 ? chapters[chapters.length - 1].chapter_name : "";
+      let str = data.item.updatedAt.slice(0, 10);
+      let name = tt.name;
+      if (name.endsWith("- ")) {
+        name = name.slice(0, name.length - 2);
+      }
+      const dataItems = ["Chapter:" + chap, "Tác giả:" + tt.director];
+      const content_story = [
+        name,
+        "Cập nhật lần cuối:" + str,
+        "Giới thiệu:" +
+          data.item.content.slice(3, data.item.content.length - 4),
+      ];
+
+      TruyenDeXuat(item);
+
+      dataItems.forEach((itemData) => {
+        let liTT = document.createElement("li");
+        liTT.classList.add("liTTa");
+        liTT.textContent = itemData;
+        nameStory.append(liTT);
+      });
+
+      nameStory.append(divTTP);
+
+      content_story.forEach((itemData, index) => {
+        let liTT = document.createElement("li");
+        if (index === 0) {
+          liTT.classList.add("ten-truyen");
+        } else if (index === 1) {
+          liTT.classList.add("update");
+        } else {
+          liTT.classList.add("liTTa");
+        }
+        liTT.textContent = itemData;
+        content_nameStory.append(liTT);
+      });
+
+      Tim(item, nameStory);
+
+      // Theo dõi
+
+      const divtheodoi = document.createElement("div");
+      divtheodoi.classList.add("divtheodoi");
+
+      const theodoi = document.createElement("i");
+      theodoi.classList.add("fa-solid", "fa-bookmark", "xoay");
+      divtheodoi.append(theodoi);
+      nameStory.append(divtheodoi);
+
+      divtheodoi.addEventListener("click", function () {
+        theodoi.style.color = "yellow";
+        localStorage.setItem("isFollowing_" + item.slug, true);
+        localStorage.setItem("userdn", JSON.stringify(luu_bien));
+        LichSu(item, bool, luu_bien, "theoDoi", 2);
+      });
+
+      // Chọn chapter
+      const choice_chap = document.createElement("select");
+      choice_chap.classList.add("choice-chap");
+
+      chapters.forEach((chapter, index) => {
+        const option_chap = document.createElement("option");
+        option_chap.classList.add("option-chap");
+        option_chap.textContent = "Chap:" + chapter.chapter_name;
+        choice_chap.append(option_chap);
+
+        const divChap = document.createElement("div");
+        divChap.classList.add("divChap");
+        divChap.append("Chap:", chapter.chapter_name);
+
+        ulChapter.append(divChap);
+
+        divChap.addEventListener("click", function () {
+          const chapterUrl = `/trangtruyen/trangtruyen.html?slug=${encodeURIComponent(
+            item.slug
+          )}&chapter=${encodeURIComponent(
+            chapter.chapter_name
+          )}&index=${encodeURIComponent(index)}`;
+          window.open(chapterUrl, "_blank");
+        });
+
+        choice_chap.addEventListener("change", function () {
+          const selectedIndex = choice_chap.selectedIndex;
+          const selectedChapter = chapters[selectedIndex];
+          const chapterUrl = `/trangtruyen/trangtruyen.html?slug=${encodeURIComponent(
+            item.slug
+          )}&chapter=${encodeURIComponent(
+            selectedChapter.chapter_name
+          )}&index=${encodeURIComponent(selectedIndex)}`;
+          window.open(chapterUrl, "_blank");
+        });
+      });
+
+      img_info.append(imgChiTiet, nameStory);
+      phanChap.append(choice_chap, ulChapter);
+    } catch (error) {
+      console.error("Có lỗi xảy ra:", error);
+    }
   });
+
   close.addEventListener("click", function () {
     overlay.style.display = "none";
   });
 }
+
 //theloai
 
 let string = "src/";
@@ -1140,6 +1152,31 @@ function chucNang() {
     } else {
       startAutoSlide();
     }
+  });
+}
+async function TruyenDeXuat(item) {
+  let recommended_stories = document.querySelector(".recommended-stories");
+  recommended_stories.textContent = "";
+  let slug_tl = item.category;
+  let random = Math.floor(Math.random() * slug_tl.length);
+  let tl = await axios.get(
+    "https://otruyenapi.com/v1/api/the-loai/" + slug_tl[random].slug + "?page=1"
+  );
+  let items = tl.data.data.items;
+  items.forEach((item) => {
+    const creatDiv = document.createElement("div");
+    creatDiv.classList.add("divImg");
+
+    const creatImg = document.createElement("img");
+    creatImg.classList.add("img");
+    creatImg.src =
+      "https://img.otruyenapi.com/uploads/comics/" + item.thumb_url;
+    const pCreat = document.createElement("p");
+    pCreat.textContent = item.name;
+    pCreat.classList.add("pCreat");
+    creatDiv.append(creatImg, pCreat);
+    recommended_stories.append(creatDiv);
+    Trangdoctruyen(item, pCreat);
   });
 }
 

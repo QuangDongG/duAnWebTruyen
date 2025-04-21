@@ -46,23 +46,7 @@
       <div class="logo">
         <a href="#"><img src="/anh/TRUTRAGUBA.png" alt="" /></a>
       </div>
-          <!-- Tim kiem -->
-      <section id="search">
-        <div class="search">
-          <div class="csearch">
-            <input
-              type="text"
-              class="text"
-              placeholder="Search..."
-              name="text"
-              required
-            />
-            <button class="but">
-              <i id="i" class="fa-solid fa-magnifying-glass fa-fade fa-sm"></i>
-            </button>
-          </div>
-        </div>
-      </section>
+     
       <!-- audio -->
        <div class="audio"><audio class="bg-music" loop>
         <source class="mp3-audio" src="mp3/TRTD.mp3" type="audio/mpeg" />
@@ -177,7 +161,23 @@
         </nav>
       </div>
     </header>
-
+     <!-- Tim kiem -->
+     <section id="search">
+      <div class="search">
+        <div class="csearch">
+          <input
+            type="text"
+            class="text"
+            placeholder="Search..."
+            name="text"
+            required
+          />
+          <button class="but">
+            <i id="i" class="fa-solid fa-magnifying-glass fa-fade fa-sm"></i>
+          </button>
+        </div>
+      </div>
+    </section>
     
     <!-- body -->
     <div class="tpbody">
@@ -260,15 +260,29 @@
     </div>
     <div class="overlay" id="overlay">
       <div class="iframe-container">
-        <div class="thongTin">
-          <div class="phanThongTin"></div>
-
-          <hr />
+        <!-- Bên trái: ảnh và info -->
+        <div class="left-section">
+          <div class="img-info"></div>
+          
+        </div>
+    
+        <!-- Chính giữa: mô tả truyện + chương -->
+        <div class="middle-section">
+          <div class="content-nameStory"></div>
+          <h2>Danh sách chương</h2>
           <div class="phanChap"></div>
         </div>
+    
+        <!-- Bên phải: đề xuất -->
+        <div class="right-section">
+          <h3 style="font-weight: bold; ">Có thể bạn cũng thích</h3>
+          <div class="recommended-stories"></div>
+        </div>
+        <div class="thongTin"><div class="phanThongTin"></div></div>
         <div class="close-btn"><i class="fa-solid fa-xmark read"></i></div>
       </div>
     </div>
+    
     <!-- truyện -->
     <div class="pageTrang" id="pageTrang">
       <div class="hienThiTrang">

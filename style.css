@@ -69,7 +69,6 @@ width: 80%;
   margin-top: 5px;
 }
 .body {
-  margin-top: 20px;
   width: 80%;
 }
 /* tim kiem */
@@ -299,69 +298,102 @@ align-items: center;
   text-decoration: underline;
 }
 .overlay {
-  width: 100%;
-  height: 100%;
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9998;
-  overflow-y: auto;
-  background-color: rgba(237, 235, 235, 0.085);
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
-.iframe-container {
-  position: relative;
-  margin: 50px auto;
 
-  width: 80%;
-  padding: 20px;
+.iframe-container {
+  display: flex;
+  background: #fff;
+  max-width: 100%;
+  height: 100%;
   border-radius: 10px;
-  background-color: #ffeff8;
-  max-width: 1000px;
+  padding: 20px;
+  gap: 20px;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Bố cục 3 cột: 2:5:3 */
+.left-section {
+  flex: 2;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 120px rgba(0, 0, 0, 0.1);
-}
-
-.imgChiTiet {
-  width: 15vw;
-  height: 22vw;
-}
-.thongTin {
-  display: flex;
+  align-items: center;
+  gap: 10px;
   width: 100%;
 }
-.phanThongTin {
-  display: flex;
+
+.middle-section {
   flex: 6;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.right-section {
+  flex: 2;
+  border-left: 1px solid #ccc;
+  padding-left: 15px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.img-info img {
+  max-width: 100%;
+  height: 60% ;
+  border-radius: 25px;
+}
+.ten-truyen{
+  font-size: 2em;
+font-weight: 900;
+text-align: center;
+}
+.update{
+  text-align: center;
+}
+.nameStory, .liTTa, .content-nameStory li {
+  list-style: none;
+  margin-bottom: 5px;
+}
+.nameStory{
+  max-width: 100%;
 }
 .phanChap {
-  flex: 4;
-  overflow: auto;
-  height: 80vh;
-
-}
-.ulChiTiet {
-  margin-left: 10px;
-  word-break: break-all;
-  color: rgb(2, 2, 2);
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: auto;
 }
 
 .divChap {
-  height: 20px;
-  display: flex;
-  cursor: pointer;
-  padding-bottom: 10px;
+  background: #f1f1f1;
+  padding: 8px;
   border-radius: 5px;
-  background-color: palegoldenrod;
-  margin: 5px auto;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-}
 .divChap:hover {
-  color: azure;
-  background-color: rgb(255, 181, 10);
+  background-color: #e0e0e0;
 }
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #ffd6d6;
+}
+
 /* hightlight */
 .active-chap {
   background-color: #ff9e9e;
@@ -531,15 +563,16 @@ hr {
   margin: 1vw;
 }
 .divTTP {
-  display: flex;
-  margin: 1vw;
+display: grid;
+grid-template-columns: 1fr 1fr;
 }
 .pTT {
-  background-color: aqua;
-  padding: 0.3vw;
-  margin-right: 0.5vw;
-  border-radius: 8px;
-  font-size: 1vw;
+  padding: 0.5em;
+ margin: 5px;
+  border-radius: 50px;
+  border: solid 2px black;
+  font-size: 1em;
+  text-align: center;
 }
 .lichsu,.theo_doi {
   position: relative;
@@ -620,38 +653,33 @@ hr {
 .liked {
   color: red;
 }
-.divyeuthich {
-  position: absolute;
-  left: 0;
-  top: 23vw;
-}
-.divtheodoi{
-  position: absolute;
-  left: 4vw;
-  top: 23vw;
-}
+
 /*  */
 @media screen and (max-width: 576px) {
-  
-.head{
-  display: flex;
-}
+  .head {
+    display: flex;
+  }
+
   .taikhoan {
     margin-top: var(--spacing-xs);
     justify-content: flex-end;
     order: 1;
   }
-  .logo{
+
+  .logo {
     order: 0;
   }
-  .audio{
+
+  .audio {
     order: 2;
     width: 100%;
   }
+
   .upload {
     display: none;
     width: 0 !important;
   }
+
   .tk1 {
     padding: 6px 12px;
   }
@@ -660,20 +688,21 @@ hr {
     font-size: 0.9rem;
   }
 
-  .text,
-  .but {
+  .text, .but {
     width: 40px;
     height: 40px;
     font-size: 0.9rem;
   }
-.body{
-margin-top: 20px;
-  width: 100%;
-}
 
-.danhsachchinh{
-  width: 100% !important;
-}
+  .body {
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .danhsachchinh {
+    width: 100% !important;
+  }
+
   .liImg {
     font-size: 0.8rem;
     padding: 6px 12px;
@@ -696,7 +725,37 @@ margin-top: 20px;
     width: 140px;
     font-size: 0.9rem;
   }
+
+  /* Giữ lại các mã đã sửa cho điện thoại */
+  .iframe-container {
+    flex-direction: column;
+    padding: 10px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .left-section, .middle-section, .right-section {
+    flex: unset;
+    width: 100%;
+  }
+
+  .right-section {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .img-info img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .close-btn {
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+  }
 }
+
 @media screen and (max-width: 768px) {
   .logo a img {
     width: 120px;
@@ -710,29 +769,34 @@ margin-top: 20px;
     flex-wrap: wrap;
     width: 100%;
   }
-  .ul li{
+
+  .ul li {
     flex: none;
   }
-.noidung .ul{
- gap: 0.5rem 1rem;
-}
-  .ul li a,.ul li .p {
+
+  .noidung .ul {
+    gap: 0.5rem 1rem;
+  }
+
+  .ul li a, .ul li .p {
     position: relative;
     font-size: 0.8rem !important;
-  
   }
-  .atheloai{
+
+  .atheloai {
     width: 60px;
     height: 20px;
   }
-.ptheloai{
-  font-size: 0.7em;
-}
-.theloai2{
-  left: -270px;
-  width: 300px;
 
-}
+  .ptheloai {
+    font-size: 0.7em;
+  }
+
+  .theloai2 {
+    left: -270px;
+    width: 300px;
+  }
+
   .h2 {
     font-size: 1.3rem;
   }
@@ -756,28 +820,31 @@ margin-top: 20px;
   }
 
   .imgChiTiet {
-    width: 150px;
+    width: 300px;
     height: 225px;
   }
 
   .imgTrangTruyen {
     width: 100%;
   }
-  .iframe-container{
+
+  .iframe-container {
     width: 100% !important;
     height: 100% !important;
     overflow: auto;
     display: flex;
- 
-  
   }
-  .ulChapter{
+
+  .ulChapter {
     position: absolute;
     top: 280px;
-
   }
-  .lichsuul,
-.lichsuul2{
-  left: -100px;
+.ulChapter{
+  display: none;
 }
+
+  .lichsuul,
+  .lichsuul2 {
+    left: -100px;
+  }
 }

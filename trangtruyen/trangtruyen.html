@@ -32,8 +32,6 @@
     <link rel="stylesheet" href="styles.css" />
 
     <title>Các tình yêu đọc truyện vui vẻ</title>
-
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <header class="header">
@@ -57,6 +55,7 @@
         <div id="chapterContent" class="chapter-content"></div>
       </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
       let lastScrollTop = 0;
       const header = document.querySelector(".header");
@@ -78,9 +77,11 @@
       });
       document.addEventListener("DOMContentLoaded", async function () {
         const urlParams = new URLSearchParams(window.location.search);
-        const slug = urlParams.get("slug");
-        const chapterName = urlParams.get("chapter");
-        const chapterIndex = parseInt(urlParams.get("index"));
+        const slug = decodeURIComponent(urlParams.get("slug"));
+        const chapterName = decodeURIComponent(urlParams.get("chapter"));
+        const chapterIndex = parseInt(
+          decodeURIComponent(urlParams.get("index"))
+        );
 
         if (!slug) {
           alert("Thông tin truyện không hợp lệ");
@@ -131,14 +132,22 @@
           chapterSelect.addEventListener("change", function () {
             const selectedIndex = parseInt(this.value);
             const selectedChapter = chapters[selectedIndex];
-            window.location.href = `/trangtruyen/trangtruyen.html?slug=${slug}&chapter=${selectedChapter.chapter_name}&index=${selectedIndex}`;
+            window.location.href = `/trangtruyen/trangtruyen.html?slug=${encodeURIComponent(
+              slug
+            )}&chapter=${encodeURIComponent(
+              selectedChapter.chapter_name
+            )}&index=${encodeURIComponent(selectedIndex)}`;
           });
 
           prevBtn.addEventListener("click", function () {
             if (chapterIndex > 0) {
               const prevIndex = chapterIndex - 1;
               const prevChapter = chapters[prevIndex];
-              window.location.href = `/trangtruyen/trangtruyen.html?slug=${slug}&chapter=${prevChapter.chapter_name}&index=${prevIndex}`;
+              window.location.href = `/trangtruyen/trangtruyen.html?slug=${encodeURIComponent(
+                slug
+              )}&chapter=${encodeURIComponent(
+                prevChapter.chapter_name
+              )}&index=${encodeURIComponent(prevIndex)}`;
             }
           });
 
@@ -146,7 +155,11 @@
             if (chapterIndex < chapters.length - 1) {
               const nextIndex = chapterIndex + 1;
               const nextChapter = chapters[nextIndex];
-              window.location.href = `/trangtruyen/trangtruyen.html?slug=${slug}&chapter=${nextChapter.chapter_name}&index=${nextIndex}`;
+              window.location.href = `/trangtruyen/trangtruyen.html?slug=${encodeURIComponent(
+                slug
+              )}&chapter=${encodeURIComponent(
+                nextChapter.chapter_name
+              )}&index=${encodeURIComponent(nextIndex)}`;
             }
           });
         } catch (error) {
@@ -183,9 +196,13 @@
             // Scroll to top
             window.scrollTo(0, 0);
           } catch (error) {
-            console.error("Error loading chapter:", error);
-            document.getElementById("chapterContent").innerHTML =
-              "<p>Có lỗi xảy ra khi tải chapter. Vui lòng thử lại sau.</p>";
+            console.error("Lỗi khi tải chapter:", error);
+            document.getElementById("chapterContent").innerHTML = `
+            <div class="error-message">
+              <p>Có lỗi xảy ra khi tải chapter. Vui lòng thử lại sau.</p>
+              <button onclick="location.reload()">Tải lại</button>
+            </div>
+          `;
           }
         }
       });
