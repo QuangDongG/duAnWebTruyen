@@ -838,12 +838,10 @@ grid-template-columns: 1fr 1fr;
   }
 
   .ulChapter {
-    position: absolute;
-    top: 280px;
+  overflow-y: scroll;
+  height: 200px;
   }
-.divChap{
-  display: none;
-}
+
 
   .lichsuul,
   .lichsuul2 {
