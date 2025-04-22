@@ -107,7 +107,11 @@ submitdk.addEventListener("click", function (e) {
 });
 //ktr đă nhập
 export let bool = false;
-export let luu_bien = "";
+export let luu_bien = JSON.parse(localStorage.getItem("userdn")) || {
+  fullName: "Khách vãng lai",
+  thongTinUser: [[], [], [], []],
+};
+
 const tk1 = document.querySelector(".tk1");
 const user_khach_hang = document.querySelector(".user_khach_hang");
 const name_khach_hang = document.querySelector(".name_khach_hang");
@@ -162,7 +166,7 @@ submitdn.addEventListener("click", function (e) {
 window.addEventListener("load", function () {
   luu_bien = JSON.parse(localStorage.getItem("nguoiDunga")) || "";
   bool = JSON.parse(localStorage.getItem("dungSai")) || false;
-  if (luu_bien != "") {
+  if (luu_bien.fullName != "Khách vãng lai") {
     name_khach_hang.textContent = "Hi_" + luu_bien.fullName + "!";
     tk1.style.display = "none";
     user_khach_hang.style.display = "flex";
@@ -184,7 +188,10 @@ user_khach_hang.append(logout);
 user_khach_hang.addEventListener("click", function () {
   logout.style.display = "flex";
   logout.addEventListener("click", function () {
-    luu_bien = "";
+    luu_bien = {
+      fullName: "Khách vãng lai",
+      thongTinUser: [[], [], [], []],
+    };
     bool = false;
     localStorage.setItem("nguoiDunga", JSON.stringify(luu_bien));
     localStorage.setItem("dungSai", JSON.stringify(bool));
@@ -636,12 +643,18 @@ export function HienThiThongTin(item, creatImg) {
 }
 ///
 export function LichSu(item, bool, luu_bien, menu, number) {
-  let lichsu = [],
-    yeuthich = [],
-    theodoi = [],
-    thich = [];
-  yeuthich = b;
-  luu_bien.thongTinUser = [lichsu, yeuthich, theodoi, thich];
+  if (!luu_bien) {
+    luu_bien = {
+      fullName: "Khách vãng lai",
+      thongTinUser: [[], [], [], []],
+    };
+  }
+
+  // Kiểm tra thongTinUser
+  if (!luu_bien.thongTinUser) {
+    luu_bien.thongTinUser = [[], [], [], []];
+  }
+
   let luuTru = JSON.parse(localStorage.getItem("user")) || [];
   let luu = JSON.parse(localStorage.getItem(menu)) || [];
   console.log(luu);
