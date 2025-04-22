@@ -2,7 +2,7 @@ async function ChoiceTL() {
   try {
     document.querySelector(
       ".title"
-    ).innerHTML = ` <h1>Chon chu de yeu thich cua ban di nao😊</h1>`;
+    ).innerHTML = ` <h1>Chọn chủ đề yêu thích của bạn đi nào 😊</h1>`;
     let list = [];
     const response = await axios.get("https://otruyenapi.com/v1/api/the-loai");
     response.data.data.items.forEach((items) => {
