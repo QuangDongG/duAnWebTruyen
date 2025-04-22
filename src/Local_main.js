@@ -166,7 +166,10 @@ submitdn.addEventListener("click", function (e) {
 window.addEventListener("load", function () {
   luu_bien = JSON.parse(localStorage.getItem("nguoiDunga")) || "";
   bool = JSON.parse(localStorage.getItem("dungSai")) || false;
-  if (luu_bien.fullName != undefined) {
+  if (
+    luu_bien.fullName !== undefined &&
+    luu_bien.fullName !== "Khách vãng lãi"
+  ) {
     name_khach_hang.textContent = "Hi_" + luu_bien.fullName + "!";
     tk1.style.display = "none";
     user_khach_hang.style.display = "flex";
@@ -188,10 +191,7 @@ user_khach_hang.append(logout);
 user_khach_hang.addEventListener("click", function () {
   logout.style.display = "flex";
   logout.addEventListener("click", function () {
-    luu_bien = {
-      fullName: "Khách vãng lai",
-      thongTinUser: [[], [], [], []],
-    };
+    luu_bien = "";
     bool = false;
     localStorage.setItem("nguoiDunga", JSON.stringify(luu_bien));
     localStorage.setItem("dungSai", JSON.stringify(bool));
@@ -452,7 +452,6 @@ export function Trangdoctruyen(item, pCreat) {
       Tim(item, nameStory);
 
       // Theo dõi
-
       const divtheodoi = document.createElement("div");
       divtheodoi.classList.add("divtheodoi");
 

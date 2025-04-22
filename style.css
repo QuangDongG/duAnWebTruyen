@@ -848,3 +848,8 @@ grid-template-columns: 1fr 1fr;
     left: -100px;
   }
 }
+.divyeuthich,.divtheodoi{
+  margin-left: 2px;
+  display: inline;
+  margin-right: 10px;
+}
