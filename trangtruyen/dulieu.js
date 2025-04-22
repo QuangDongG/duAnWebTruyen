@@ -7,7 +7,7 @@ async function ChoiceTL() {
     const response = await axios.get("https://otruyenapi.com/v1/api/the-loai");
     response.data.data.items.forEach((items) => {
       const bttheloai = document.createElement("button");
-
+      bttheloai.style.backgroundImage = `url(/nhom7/${items.slug}.jpg)`;
       const ptheloai = document.createElement("p");
       bttheloai.classList.add("atheloai");
       ptheloai.classList.add("ptheloai");
