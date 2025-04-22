@@ -166,7 +166,7 @@ submitdn.addEventListener("click", function (e) {
 window.addEventListener("load", function () {
   luu_bien = JSON.parse(localStorage.getItem("nguoiDunga")) || "";
   bool = JSON.parse(localStorage.getItem("dungSai")) || false;
-  if (luu_bien.fullName != "Khách vãng lai") {
+  if (luu_bien.fullName != undefined) {
     name_khach_hang.textContent = "Hi_" + luu_bien.fullName + "!";
     tk1.style.display = "none";
     user_khach_hang.style.display = "flex";
@@ -650,7 +650,6 @@ export function LichSu(item, bool, luu_bien, menu, number) {
     };
   }
 
-  // Kiểm tra thongTinUser
   if (!luu_bien.thongTinUser) {
     luu_bien.thongTinUser = [[], [], [], []];
   }
