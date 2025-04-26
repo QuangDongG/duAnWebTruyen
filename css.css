@@ -215,19 +215,8 @@ body {
   top: 0;
   z-index: 1;
   box-shadow: inset 0 0 15px rgba(255, 112, 143, 0.523);
-  animation: hoverMove 2s infinite linear;
 }
-@keyframes hoverMove {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateY(2px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
+
 .noidung ul {
   display: flex;
   list-style: none;

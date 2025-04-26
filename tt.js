@@ -67,6 +67,7 @@ async function tt() {
     thumb_url: "",
   };
   const pClick = Array.from(document.querySelectorAll(".doc"));
+
   pClick.forEach((p, index) => {
     p.addEventListener("click", () => {
       item.slug = slug[index];
@@ -75,7 +76,19 @@ async function tt() {
     Trangdoctruyen(item, p);
   });
 }
-
+function StoryDay() {
+  const item = {
+    slug: "em-co-nghe-thay-toi-noi-khong",
+    thumb_url: "em-co-nghe-thay-toi-noi-khong-thumb.jpg",
+  };
+  const discover_btn = document.querySelector(".discover-btn");
+  discover_btn.addEventListener("click", () => {
+    item.slug = slug[index];
+    item.thumb_url = thumb_url[index];
+  });
+  Trangdoctruyen(item, discover_btn);
+}
+StoryDay();
 tt();
 const p = document.querySelectorAll(".thongtin");
 select.addEventListener("mouseover", function () {

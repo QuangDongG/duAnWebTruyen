@@ -258,11 +258,11 @@ cursor: pointer;
 }
 div .liImg{
   display: flex;
-  width: 2.5em;
-height: 2.5em;
+  width: 2em;
+height: 2em;
   margin: 4px;
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 25%;
   border: solid 1.5px rgb(145, 134, 134);
   justify-content: center;
 align-items: center;
@@ -271,10 +271,12 @@ align-items: center;
 
   font-size: 1em;
 
-  color: rgb(0, 0, 0);
   
   text-decoration: none;
 
+}
+.liImg:hover{
+color: rgb(251,161,51);
 }
 .mauTrang {
   background: rgba(0, 0, 0, 0.605);
@@ -283,7 +285,6 @@ align-items: center;
   width: 100%;
   display: block;
   cursor: pointer;
-  color: rgb(0, 0, 0);
   padding: 0.2em;
   background-color: rgba(255, 255, 255, 0);
   border-radius: 10px;
@@ -507,7 +508,6 @@ hr {
   border: solid 1px black;
   border-radius: 20px;
   margin: 5px;
-
   width: 7vw;
   height: 2vw;
   justify-content: center;
@@ -658,6 +658,7 @@ grid-template-columns: 1fr 1fr;
 
 /*  */
 @media screen and (max-width: 576px) {
+  
   .head {
     display: flex;
   }
@@ -791,12 +792,15 @@ grid-template-columns: 1fr 1fr;
   }
 
   .ptheloai {
-    font-size: 0.7em;
+    font-size: 0.6em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .theloai2 {
-    left: -270px;
-    width: 300px;
+  left: -60vw;
+    width: 100vw;
   }
 
   .h2 {

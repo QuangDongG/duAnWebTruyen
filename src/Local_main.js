@@ -1,24 +1,19 @@
 ///
 let b = [];
 let count = 0;
+
 function checkPassword(password) {
   const hasUpperCase = /[A-Z]/.test(password);
   const hasLowerCase = /[a-z]/.test(password);
   const hasNumber = /\d/.test(password);
 
-  if (hasUpperCase && hasLowerCase && hasNumber) {
-    return true;
-  }
-  return false;
+  return hasUpperCase && hasLowerCase && hasNumber;
 }
 
 function kTraTK(tk) {
   if (tk.length < 7) {
-    log_in_dk.forEach((dk) => {
-      dk.value = "";
-      count++;
-    });
-    console.log("tai khoan qua ngan");
+    alert("Tài khoản quá ngắn, phải trên 7 kí tự");
+    return false;
   }
   for (let i = 0; i < tk.length; i++) {
     let ascii = tk.charCodeAt(i);
@@ -29,82 +24,81 @@ function kTraTK(tk) {
         (ascii >= 48 && ascii <= 57)
       )
     ) {
-      log_in_dk.forEach((dk) => {
-        dk.value = "";
-      });
-      count++;
+      alert("Tài khoản không được chứa kí tự đặc biệt");
+      return false;
     }
   }
+  return true;
 }
+
 function Constructor(fullName, taiKhoan, matKhau, thongTinUser) {
   this.fullName = fullName;
   this.taiKhoan = taiKhoan;
   this.matKhau = matKhau;
   this.thongTinUser = thongTinUser;
 }
-//dk thong tin
+
+// Đăng ký thông tin
 const log_in_dk = Array.from(document.querySelectorAll(".dangki"));
 const submitdk = document.querySelector(".sdk");
 const gddki = document.querySelector(".gddk");
 const gddnhap = document.querySelector(".gddn");
 let luuTruThongTin = JSON.parse(localStorage.getItem("user")) || [];
+
 submitdk.addEventListener("click", function (e) {
   e.preventDefault();
-  let fullName,
-    taiKhoan,
-    matKhau,
+  let fullName = "",
+    taiKhoan = "",
+    matKhau = "",
     thongTinUser = [];
 
-  log_in_dk.forEach((dk, index) => {
-    if (index === 0) {
-      fullName = dk.value;
-    } else if (index === 1) {
-      //ktra dk tai khoan
-      taiKhoan = dk.value;
-      console.log(taiKhoan.length);
-      kTraTK(taiKhoan);
-    } else {
-      //ktra mat khau
-      matKhau = dk.value;
-      kTraTK(matKhau);
-      checkPassword(matKhau);
-      if (checkPassword(matKhau) === false) {
-        log_in_dk.forEach((dk) => {
-          dk.value = "";
-        });
-        count++;
-      }
-    }
-  });
-  //kra tai khoan trong local
-  luuTruThongTin.forEach((tt) => {
-    if (taiKhoan === tt.taiKhoan || taiKhoan === "") {
-      console.log("bị trùng rồi");
+  // Lấy dữ liệu input
+  fullName = log_in_dk[0].value.trim();
+  taiKhoan = log_in_dk[1].value.trim();
+  matKhau = log_in_dk[2].value.trim();
 
-      log_in_dk.forEach((dk) => {
-        dk.value = "";
-      });
-      count++;
-      return;
-    }
-  });
+  // Kiểm tra tài khoản
+  if (!kTraTK(taiKhoan)) {
+    count++;
+  }
+
+  // Kiểm tra trùng tài khoản
+  let trungTK = luuTruThongTin.some((tt) => tt.taiKhoan === taiKhoan);
+  if (trungTK || taiKhoan === "") {
+    alert("Tài khoản đã có người đăng kí hoặc để trống");
+    count++;
+  }
+
+  // Kiểm tra mật khẩu
+  if (!checkPassword(matKhau)) {
+    alert("Mật khẩu phải chứa kí tự viết hoa, viết thường và số");
+    count++;
+  }
+
   if (count < 1) {
     const thongTin = new Constructor(fullName, taiKhoan, matKhau, thongTinUser);
-    console.log(thongTin); //
     luuTruThongTin.unshift(thongTin);
     localStorage.setItem("user", JSON.stringify(luuTruThongTin));
-    console.log(luuTruThongTin); //
+    console.log(luuTruThongTin);
+
     gddki.classList.add("hide");
     gddnhap.classList.remove("hide");
+    alert("Đăng kí thành công!");
 
-    //localStorage.clear()
-    //localStorage.removeItem("user")
+    // Reset input
+    log_in_dk.forEach((dk) => {
+      dk.value = "";
+    });
+  } else {
+    // Nếu có lỗi thì clear input
     log_in_dk.forEach((dk) => {
       dk.value = "";
     });
   }
+
   count = 0;
 });
+
 //ktr đă nhập
 export let bool = false;
 export let luu_bien = JSON.parse(localStorage.getItem("userdn")) || {
@@ -876,10 +870,11 @@ async function Body() {
     '<i class="fas fa-theater-masks" style="color: #ef9b4e;"></i>',
     '<i class="fas fa-venus-double" style="color: #f59999;"></i>',
     '<i class="fas fa-user-secret" style="color: #935806;"></i>',
-    "",
+    '<i class="fa-solid fa-person-rifle"></i>',
   ];
   let sliderFoot = document.querySelector(".sliderFoot");
   let sliderFootTour = document.querySelector(".sliderFootTour");
+  let sliderHead = document.querySelector(".sliderHead");
   let slider = document.querySelector(".slider");
   for (let i = 0; i < noiDungPhanTrang.length; i++) {
     let categorySection = document.createElement("div");
@@ -926,8 +921,10 @@ async function Body() {
       slider.append(categorySection);
     } else if (i >= 4 && i < 7) {
       sliderFoot.append(categorySection);
-    } else {
+    } else if (i >= 7 && i < 11) {
       sliderFootTour.append(categorySection);
+    } else {
+      sliderHead.append(categorySection);
     }
     const xemThem = Array.from(document.querySelectorAll(".xemthem"));
     xemThem[i].addEventListener("click", function () {
